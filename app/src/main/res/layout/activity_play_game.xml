@@ -1,0 +1,331 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/snow"
+    tools:context=".PlayGameActivity">
+
+    <TextView
+        android:id="@+id/textViewPlayGameTic"
+        style="@style/gameTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/tic"
+        android:textColor="@color/moonstone"
+        android:textSize="54sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/textViewPlayGameTac"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintHorizontal_chainStyle="packed"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.04000002" />
+
+    <TextView
+        android:id="@+id/textViewPlayGameTac"
+        style="@style/gameTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_weight="1"
+        android:text="@string/tac"
+        android:textColor="@color/delftBlue"
+        android:textSize="54sp"
+        app:layout_constraintBottom_toBottomOf="@+id/textViewPlayGameTic"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/textViewPlayGameToe"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/textViewPlayGameTic"
+        app:layout_constraintTop_toTopOf="@+id/textViewPlayGameTic"
+        app:layout_constraintVertical_bias="0.054" />
+
+    <TextView
+        android:id="@+id/textViewPlayGameToe"
+        style="@style/gameTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:text="@string/toe"
+        android:textColor="@color/pumpkin"
+        android:textSize="54sp"
+        app:layout_constraintBottom_toBottomOf="@+id/textViewPlayGameTac"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/textViewPlayGameTac"
+        app:layout_constraintTop_toTopOf="@+id/textViewPlayGameTac"
+        app:layout_constraintVertical_bias="0.054" />
+
+    <TextView
+        android:id="@+id/textViewPlayerTurn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/player_turn_background"
+        android:fontFamily="@font/roboto_medium"
+        android:gravity="center"
+        android:paddingStart="24dp"
+        android:paddingEnd="24dp"
+        android:text="Player One's Turn"
+        android:textColor="@color/snow"
+        android:textSize="24sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textViewPlayGameTac"
+        app:layout_constraintVertical_bias="0.04000002" />
+
+    <LinearLayout
+        android:id="@+id/linearLayout"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:orientation="vertical"
+        android:padding="20dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintDimensionRatio="1:1"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textViewPlayerTurn"
+        app:layout_constraintVertical_bias="0.120000005">
+
+        <LinearLayout
+            android:id="@+id/row1"
+            style="@style/gameBoardRow"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/button2"
+                style="@style/buttonColumn"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:paddingLeft="0dp"
+                android:paddingTop="0dp"
+                android:paddingRight="0dp"
+                android:paddingBottom="0dp"
+                android:text="X"
+                android:textColor="@color/moonstone" />
+
+            <View
+                android:id="@+id/colDivider1"
+                style="@style/verticalLine"
+                android:layout_height="match_parent"
+                android:layout_weight="0"
+                android:background="@color/delftBlue" />
+
+            <Button
+                android:id="@+id/button3"
+                style="@style/buttonColumn"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:paddingLeft="0dp"
+                android:paddingTop="0dp"
+                android:paddingRight="0dp"
+                android:paddingBottom="0dp"
+                android:text="X"
+                android:textColor="@color/moonstone" />
+
+            <View
+                android:id="@+id/colDivider2"
+                style="@style/verticalLine"
+                android:layout_height="match_parent"
+                android:layout_weight="0"
+                android:background="@color/delftBlue" />
+
+            <Button
+                android:id="@+id/button4"
+                style="@style/buttonColumn"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:paddingLeft="0dp"
+                android:paddingTop="0dp"
+                android:paddingRight="0dp"
+                android:paddingBottom="0dp"
+                android:text="X"
+                android:textColor="@color/moonstone" />
+
+        </LinearLayout>
+
+        <View
+            android:id="@+id/rowDivider1"
+            style="@style/horizontalLine"
+            android:layout_width="match_parent"
+            android:layout_weight="0"
+            android:background="@color/delftBlue" />
+
+        <LinearLayout
+            android:id="@+id/row2"
+            style="@style/gameBoardRow"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/button5"
+                style="@style/buttonColumn"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:paddingLeft="0dp"
+                android:paddingTop="0dp"
+                android:paddingRight="0dp"
+                android:paddingBottom="0dp"
+                android:text="O"
+                android:textColor="@color/pumpkin" />
+
+            <View
+                android:id="@+id/colDivider3"
+                style="@style/verticalLine"
+                android:layout_height="match_parent"
+                android:layout_weight="0"
+                android:background="@color/delftBlue" />
+
+            <Button
+                android:id="@+id/button6"
+                style="@style/buttonColumn"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:paddingLeft="0dp"
+                android:paddingTop="0dp"
+                android:paddingRight="0dp"
+                android:paddingBottom="0dp"
+                android:text="O"
+                android:textColor="@color/pumpkin" />
+
+            <View
+                android:id="@+id/colDivider4"
+                style="@style/verticalLine"
+                android:layout_height="match_parent"
+                android:layout_weight="0"
+                android:background="@color/delftBlue" />
+
+            <Button
+                android:id="@+id/button7"
+                style="@style/buttonColumn"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:paddingLeft="0dp"
+                android:paddingTop="0dp"
+                android:paddingRight="0dp"
+                android:paddingBottom="0dp"
+                android:text="O"
+                android:textColor="@color/pumpkin" />
+
+        </LinearLayout>
+
+        <View
+            android:id="@+id/rowDivider2"
+            style="@style/horizontalLine"
+            android:layout_width="match_parent"
+            android:layout_weight="0"
+            android:background="@color/delftBlue" />
+
+        <LinearLayout
+            android:id="@+id/row3"
+            style="@style/gameBoardRow"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/button8"
+                style="@style/buttonColumn"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:paddingLeft="0dp"
+                android:paddingTop="0dp"
+                android:paddingRight="0dp"
+                android:paddingBottom="0dp"
+                android:text="X"
+                android:textColor="@color/moonstone" />
+
+            <View
+                android:id="@+id/colDivider5"
+                style="@style/verticalLine"
+                android:layout_height="match_parent"
+                android:layout_weight="0"
+                android:background="@color/delftBlue" />
+
+            <Button
+                android:id="@+id/button10"
+                style="@style/buttonColumn"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:paddingLeft="0dp"
+                android:paddingTop="0dp"
+                android:paddingRight="0dp"
+                android:paddingBottom="0dp"
+                android:text="X"
+                android:textColor="@color/moonstone" />
+
+            <View
+                android:id="@+id/colDivider6"
+                style="@style/verticalLine"
+                android:layout_height="match_parent"
+                android:layout_weight="0"
+                android:background="@color/delftBlue" />
+
+            <Button
+                android:id="@+id/button9"
+                style="@style/buttonColumn"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:paddingLeft="0dp"
+                android:paddingTop="0dp"
+                android:paddingRight="0dp"
+                android:paddingBottom="0dp"
+                android:text="X"
+                android:textColor="@color/moonstone" />
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginEnd="32dp"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout"
+        app:layout_constraintVertical_bias="0.32">
+
+        <Button
+            android:id="@+id/buttonHome"
+            style="@style/buttonPrimary"
+            android:layout_width="0dp"
+            android:layout_height="54dp"
+            android:layout_marginEnd="9dp"
+            android:layout_weight="1"
+            android:text="@string/buttonHome"
+            android:textSize="22sp" />
+
+        <Button
+            android:id="@+id/buttonRestart"
+            style="@style/buttonPrimary"
+            android:layout_width="0dp"
+            android:layout_height="54dp"
+            android:layout_marginStart="9dp"
+            android:layout_weight="1"
+            android:text="@string/buttonRestart"
+            android:textSize="22sp" />
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

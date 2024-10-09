@@ -1,0 +1,54 @@
+<resources>
+    <string name="app_name">TicTacToe</string>
+
+    <string name="tic">Tic</string>
+    <string name="tac">Tac</string>
+    <string name="toe">Toe</string>
+
+    <string name="playerNames">Player Names</string>
+    <string name="playGame">Play New Game</string>
+    <string name="standings">Standings</string>
+
+    <string name="playerNameInstructions">Enter a name below to add a new player profile to the game.</string>
+    <string name="playerName">Player Name</string>
+    <string name="playerNamePlaceholder">Enter a player name</string>
+    <string name="addPlayer">Add Player</string>
+
+    <string name="gameSetup">Game Setup</string>
+    <string name="gameVsAndroid">Game vs Android</string>
+    <string name="gameVsPlayer">Game vs Player</string>
+
+    <string name="selectPlayer">Select Player</string>
+    <string name="selectPlayers">Select Players</string>
+    <string name="playerOne">Player 1</string>
+    <string name="playerTwo">Player 2</string>
+    <string name="addNewPlayer">Add New Player</string>
+    <string name="play">Play Game</string>
+
+    <string name="playerTurn">%1$s\'s Turn </string>
+    <string name="buttonHome">Home</string>
+    <string name="buttonRestart">Restart</string>
+
+    <string name="restartWarning">Do you want to restart the game? All progress will be lost.</string>
+    <string name="restartWarningYes">Restart Game</string>
+    <string name="restartWarningNo">Continue Game</string>
+
+    <string name="winningPlayer">%1$s</string>
+    <string name="gameWon">Won!</string>
+    <string name="gameTied">Tie Game</string>
+    <string name="buttonPlayAgain">Play Again</string>
+
+    <string name="player">Player</string>
+    <string name="gamesPlayed">Played</string>
+    <string name="gamesWon">Won</string>
+    <string name="winPercentage">Win %</string>
+
+    <string-array name="simpleTest">
+        <item>Item one</item>
+        <item>Item two</item>
+        <item>Item three</item>
+        <item>Item four</item>
+    </string-array>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+</resources>

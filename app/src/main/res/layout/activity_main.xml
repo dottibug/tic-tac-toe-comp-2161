@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
+
+    <TextView
+        android:id="@+id/textViewTic"
+        style="@style/gameTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@android:color/transparent"
+        android:text="@string/tic"
+        android:textColor="@color/moonstone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.06" />
+
+    <TextView
+        android:id="@+id/textViewTac"
+        style="@style/gameTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="-50dp"
+        android:background="@android:color/transparent"
+        android:text="@string/tac"
+        android:textColor="#505A79"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/textViewTic"
+        app:layout_constraintStart_toStartOf="@+id/textViewTic"
+        app:layout_constraintTop_toBottomOf="@+id/textViewTic"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <TextView
+        android:id="@+id/textViewToe"
+        style="@style/gameTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="-50dp"
+        android:background="@android:color/transparent"
+        android:text="@string/toe"
+        android:textColor="#F89F55"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/textViewTac"
+        app:layout_constraintStart_toStartOf="@+id/textViewTac"
+        app:layout_constraintTop_toBottomOf="@+id/textViewTac"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <Button
+        android:id="@+id/buttonPlayerNames"
+        style="@style/buttonPrimary"
+        android:layout_width="300dp"
+        android:layout_height="72dp"
+        android:text="@string/playerNames"
+        app:layout_constraintBottom_toTopOf="@+id/buttonNewGame"
+        app:layout_constraintEnd_toEndOf="@+id/buttonNewGame"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="@+id/buttonNewGame"
+        app:layout_constraintTop_toBottomOf="@+id/textViewToe"
+        app:layout_constraintVertical_bias="0.24"
+        app:layout_constraintVertical_chainStyle="packed" />
+
+    <Button
+        android:id="@+id/buttonNewGame"
+        style="@style/buttonPrimary"
+        android:layout_marginTop="18dp"
+        android:layout_marginBottom="18dp"
+        android:text="@string/playGame"
+        app:layout_constraintBottom_toTopOf="@+id/buttonStandings"
+        app:layout_constraintEnd_toEndOf="@+id/buttonStandings"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="@+id/buttonStandings"
+        app:layout_constraintTop_toBottomOf="@+id/buttonPlayerNames" />
+
+    <Button
+        android:id="@+id/buttonStandings"
+        style="@style/buttonPrimary"
+        android:text="@string/standings"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/buttonNewGame" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
