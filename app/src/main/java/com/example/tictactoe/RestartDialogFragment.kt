@@ -5,17 +5,15 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.DialogFragment
 import com.example.tictactoe.databinding.FragmentRestartDialogBinding
-import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 
-class RestartDialogFragment : BottomSheetDialogFragment() {
+class RestartDialogFragment : DialogFragment() {
     // Null until fragment is created (releases binding on destroy to save memory)
     private var binding: FragmentRestartDialogBinding? = null
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?): View? {
         binding = FragmentRestartDialogBinding.inflate(inflater, container, false)
         return binding?.root
     }
@@ -35,5 +33,9 @@ class RestartDialogFragment : BottomSheetDialogFragment() {
     override fun onDestroyView() {
         super.onDestroyView()
         binding = null
+    }
+
+    companion object {
+        const val TAG = "RestartDialog"
     }
 }

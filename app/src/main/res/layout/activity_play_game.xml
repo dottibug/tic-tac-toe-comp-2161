@@ -79,7 +79,7 @@
         app:layout_constraintVertical_bias="0.04000002" />
 
     <LinearLayout
-        android:id="@+id/linearLayout"
+        android:id="@+id/linearLayoutBoard"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:orientation="vertical"
@@ -296,26 +296,27 @@
     </LinearLayout>
 
     <LinearLayout
+        android:id="@+id/linearLayoutButtons"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="32dp"
-        android:layout_marginEnd="32dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginEnd="24dp"
         android:orientation="horizontal"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayoutBoard"
         app:layout_constraintVertical_bias="0.32">
 
         <Button
-            android:id="@+id/buttonHome"
+            android:id="@+id/buttonGameGoToMainMenu"
             style="@style/buttonPrimary"
             android:layout_width="0dp"
             android:layout_height="54dp"
             android:layout_marginEnd="9dp"
             android:layout_weight="1"
             android:text="@string/buttonHome"
-            android:textSize="22sp" />
+            android:textSize="18sp" />
 
         <Button
             android:id="@+id/buttonRestart"
@@ -325,7 +326,7 @@
             android:layout_marginStart="9dp"
             android:layout_weight="1"
             android:text="@string/buttonRestart"
-            android:textSize="22sp" />
+            android:textSize="18sp" />
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

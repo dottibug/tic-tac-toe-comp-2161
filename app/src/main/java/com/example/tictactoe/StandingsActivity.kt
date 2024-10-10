@@ -8,12 +8,13 @@ import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import com.example.tictactoe.databinding.ActivityStandingsBinding
 
+// StandingsActivity class for displaying a list of players stats.
+// Stats include player name, games won, games played, and win percentage
+// Player data is retrieved asynchronously from the local game data file using PlayerManager
 class StandingsActivity : AppCompatActivity() {
-
-    // TODO Layout background isn't applying properly yet
-
     private lateinit var binding: ActivityStandingsBinding
     private lateinit var standingsList: ListView
+    private val playerManager = PlayerManager()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -28,22 +29,17 @@ class StandingsActivity : AppCompatActivity() {
             insets
         }
 
+        // Asynchronously get the list of players from the local game data file
+        playerManager.asyncGetPlayers(this) { players -> populateListView(players) }
+
         standingsList = binding.listViewStandings
+        binding.buttonStandingsHome.setOnClickListener { finish() }
+    }
 
-        // Todo Create a method that gets the player data from the game data file and creates
-        //  a list of Player objects to pass to the adapter for formatting
-        val players = ArrayList<Player>()
-        players.add(Player("Player 1", 5, 8, 62.5))
-        players.add(Player("Player 2", 3, 6, 50.0))
-        players.add(Player("Player 3", 2, 4, 50.0))
-
+    // Populate the standings list view with the players from the local game data file
+    private fun populateListView(players: List<Player>) {
         val standingsListViewAdapter = StandingsListViewAdapter(this, players)
         standingsList.adapter = standingsListViewAdapter
-
-        // Previous example
-        //        val citiesList : ListView = view.findViewById(R.id.citiesListView)
-        //        val cities : Array<String> = resources.getStringArray(R.array.cities)
-        //        val adapter = CitiesAdapter(requireContext(), cities)
-        //        citiesList.adapter = adapter
     }
+
 }

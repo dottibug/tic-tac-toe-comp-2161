@@ -14,11 +14,13 @@
         android:layout_height="wrap_content"
         android:fontFamily="@font/bagel_fat_one"
         android:text="@string/standings"
+        android:textAlignment="center"
+        android:textColor="@color/delftBlue"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.050000012" />
+        app:layout_constraintVertical_bias="0.08" />
 
     <LinearLayout
         android:id="@+id/linearLayout2"
@@ -32,54 +34,62 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textViewStandingsTitle"
-        app:layout_constraintVertical_bias="0.07999998">
+        app:layout_constraintVertical_bias="0.06">
 
         <TextView
             android:id="@+id/textViewPlayer"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="3"
+            android:layout_weight="2.25"
             android:background="@android:color/transparent"
             android:fontFamily="@font/roboto_medium"
             android:text="@string/player"
+            android:textAllCaps="true"
             android:textColor="@color/snow"
-            android:textSize="20sp" />
+            android:textSize="18sp"
+            android:textStyle="bold" />
 
         <TextView
             android:id="@+id/textViewGamesWon"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:background="@android:color/transparent"
             android:fontFamily="@font/roboto_medium"
             android:text="@string/gamesWon"
             android:textAlignment="center"
+            android:textAllCaps="true"
             android:textColor="@color/snow"
-            android:textSize="20sp" />
+            android:textSize="18sp"
+            android:textStyle="bold" />
 
         <TextView
             android:id="@+id/textViewGamesPlayed"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:background="@android:color/transparent"
             android:fontFamily="@font/roboto_medium"
             android:text="@string/gamesPlayed"
             android:textAlignment="center"
+            android:textAllCaps="true"
             android:textColor="@color/snow"
-            android:textSize="20sp" />
+            android:textSize="18sp"
+            android:textStyle="bold" />
 
         <TextView
             android:id="@+id/textViewWinPercentage"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:background="@android:color/transparent"
             android:fontFamily="@font/roboto_medium"
             android:text="@string/winPercentage"
-            android:textAlignment="center"
+            android:textAlignment="textEnd"
+            android:textAllCaps="true"
             android:textColor="@color/snow"
-            android:textSize="20sp" />
+            android:textSize="18sp"
+            android:textStyle="bold" />
     </LinearLayout>
 
     <ListView
@@ -87,12 +97,29 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="18dp"
+        android:layout_marginTop="-2dp"
         android:layout_marginEnd="18dp"
+        android:layout_marginBottom="32dp"
         android:background="@drawable/standing_table_body"
+        android:maxHeight="290dp"
+        android:padding="8dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/linearLayout2"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintVertical_bias="0.0"
+        tools:layout_height="290dp"
+        tools:listitem="@layout/custom_list_item" />
+
+    <Button
+        android:id="@+id/buttonStandingsHome"
+        style="@style/buttonPrimary"
+        android:backgroundTint="@color/delftBlue"
+        android:text="@string/buttonHome"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/listViewStandings"
+        app:layout_constraintVertical_bias="0.18" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -3,19 +3,29 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="wrap_content">
 
     <LinearLayout
+        android:id="@+id/linearLayoutListItem"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:background="@android:color/transparent"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:paddingStart="10dp"
+        android:paddingTop="12dp"
+        android:paddingEnd="10dp"
+        android:paddingBottom="12dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0">
 
         <TextView
             android:id="@+id/textViewListItemPlayer"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="3"
+            android:layout_weight="2.25"
             android:background="@android:color/transparent"
             android:fontFamily="@font/roboto_medium"
             android:text="TextView"
@@ -23,7 +33,7 @@
 
         <TextView
             android:id="@+id/textViewListItemWon"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:background="@android:color/transparent"
@@ -34,7 +44,7 @@
 
         <TextView
             android:id="@+id/textViewListItemPlayed"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:background="@android:color/transparent"
@@ -45,13 +55,13 @@
 
         <TextView
             android:id="@+id/textViewListItemWinPercentage"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:background="@android:color/transparent"
             android:fontFamily="@font/roboto_medium"
             android:text="TextView"
-            android:textAlignment="center"
+            android:textAlignment="textEnd"
             android:textSize="18sp" />
     </LinearLayout>
 

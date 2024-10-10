@@ -10,6 +10,7 @@ import com.example.tictactoe.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
+    private val playerManager = PlayerManager()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -24,27 +25,36 @@ class MainActivity : AppCompatActivity() {
             insets
         }
 
+        setupPlayerDataFile()
+
+        // Set up the buttons
         binding.buttonPlayerNames.setOnClickListener { onPlayerNamesClick() }
         binding.buttonNewGame.setOnClickListener { onNewGameClick() }
         binding.buttonStandings.setOnClickListener { onStandingsClick() }
-
     }
 
+    // Set up the local game data file
+    private fun setupPlayerDataFile() {
+        // NOTE: Dev purposes only (to delete local file when testing)
+        // playerManager.deletePlayerDataFile(this)
+
+        playerManager.createPlayerDataFile(this)
+    }
+
+    // Start the EnterNamesActivity to add player names to the local game data file
     private fun onPlayerNamesClick() {
-        // Start the EnterNamesActivity
         val intent = Intent(this, EnterNamesActivity::class.java)
         startActivity(intent)
     }
 
-
+    // Start the GameSetupActivity to set up a new game
     private fun onNewGameClick() {
-        // Start the GameSetupActivity
         val intent = Intent(this, GameSetupActivity::class.java)
         startActivity(intent)
     }
 
+    // Start the StandingsActivity to view player standings from the local game data file
     private fun onStandingsClick() {
-        // Start the StandingsActivity
         val intent = Intent(this, StandingsActivity::class.java)
         startActivity(intent)
     }

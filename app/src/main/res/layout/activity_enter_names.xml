@@ -9,15 +9,16 @@
 
     <TextView
         android:id="@+id/textViewPlayerNameLabel"
+        style="@style/heading"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/playerName"
+        android:textColor="@color/delftBlue"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.18"
-        style="@style/heading" />
+        app:layout_constraintVertical_bias="0.18" />
 
     <TextView
         android:id="@+id/textViewInstructions"
@@ -38,7 +39,7 @@
         app:layout_constraintVertical_bias="0.04000002" />
 
     <EditText
-        android:id="@+id/editTextText"
+        android:id="@+id/editTextPlayerName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:ems="10"
@@ -55,7 +56,7 @@
         app:layout_constraintVertical_bias="0.18" />
 
     <Button
-        android:id="@+id/button"
+        android:id="@+id/buttonAddPlayer"
         style="@style/buttonPrimary"
         android:layout_height="64dp"
         android:text="@string/addPlayer"
@@ -63,6 +64,18 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextText"
+        app:layout_constraintTop_toBottomOf="@+id/editTextPlayerName"
         app:layout_constraintVertical_bias="0.24" />
+
+    <Button
+        android:id="@+id/buttonEnterNamesHome"
+        style="@style/buttonSecondary"
+        android:layout_height="64dp"
+        android:text="@string/buttonHome"
+        android:textSize="22sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/buttonAddPlayer"
+        app:layout_constraintVertical_bias="0.120000005" />
 </androidx.constraintlayout.widget.ConstraintLayout>

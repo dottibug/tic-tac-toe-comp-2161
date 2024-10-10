@@ -1,5 +1,6 @@
 package com.example.tictactoe
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
@@ -9,7 +10,6 @@ import com.example.tictactoe.databinding.ActivityPlayGameBinding
 
 class PlayGameActivity : AppCompatActivity() {
     private lateinit var binding: ActivityPlayGameBinding
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -24,13 +24,20 @@ class PlayGameActivity : AppCompatActivity() {
             insets
         }
 
+        binding.buttonGameGoToMainMenu.setOnClickListener { navigateToHome() }
         binding.buttonRestart.setOnClickListener { showRestartDialog() }
     }
 
     // Show the restart dialog
     private fun showRestartDialog() {
         val restartDialog = RestartDialogFragment()
-        restartDialog.show(supportFragmentManager, "restart_dialog")
+        restartDialog.show(supportFragmentManager, RestartDialogFragment.TAG)
+    }
+
+    // Navigate to the home screen
+    private fun navigateToHome() {
+        val intent = Intent(this, MainActivity::class.java)
+        startActivity(intent)
     }
 
 }

@@ -24,12 +24,13 @@
     <string name="playerTwo">Player 2</string>
     <string name="addNewPlayer">Add New Player</string>
     <string name="play">Play Game</string>
+    <string name="buttonGameSetup">Back to Game Setup</string>
 
     <string name="playerTurn">%1$s\'s Turn </string>
-    <string name="buttonHome">Home</string>
+    <string name="buttonHome">Main Menu</string>
     <string name="buttonRestart">Restart</string>
 
-    <string name="restartWarning">Do you want to restart the game? All progress will be lost.</string>
+    <string name="restartWarning">Restart the game? All progress will be lost.</string>
     <string name="restartWarningYes">Restart Game</string>
     <string name="restartWarningNo">Continue Game</string>
 

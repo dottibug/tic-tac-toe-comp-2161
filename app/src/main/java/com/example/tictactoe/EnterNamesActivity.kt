@@ -7,8 +7,13 @@ import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import com.example.tictactoe.databinding.ActivityEnterNamesBinding
 
+// Activity for entering player names. This activity is launched from the MainActivity.
+// Players can enter their name to the local game data file.
+// If the player already exists, the player will not be added.
 class EnterNamesActivity : AppCompatActivity() {
     private lateinit var binding: ActivityEnterNamesBinding
+    private val playerManager = PlayerManager()
+    private val appUtils = AppUtils()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -22,12 +27,29 @@ class EnterNamesActivity : AppCompatActivity() {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
+
+        binding.buttonAddPlayer.setOnClickListener { handleAddPlayerClick() }
+        binding.buttonEnterNamesHome.setOnClickListener { finish() }
+    }
+
+    // Gets the player name from the input field and adds it to the local game data file if the
+    // player does not already exist
+    private fun handleAddPlayerClick() {
+        val playerName = binding.editTextPlayerName.text.toString().trim()
+
+        if (playerName.isNotEmpty()) {
+            playerManager.asyncAddPlayer(this, playerName) { response ->
+
+                // Player added successfully: toast message, clear input, return to the main activity
+                if (response.success) {
+                    appUtils.showToast(this, response.message)
+                    binding.editTextPlayerName.text.clear()
+                    finish()
+                }
+
+                // Player already exists: toast message
+                else { appUtils.showToast(this, response.message) }
+            }
+        }
     }
 }
-
-// Enter a player name
-// Add the player name to local file (if it isn't already there)
-// NOTE: Should writing/reading from the local file be a separate thread?
-// If the player name is already in local file, toast that the player already exists
-// The player names will be displayed when setting up a new game for players to select
-    // from (include a link to add a new player on that screen)

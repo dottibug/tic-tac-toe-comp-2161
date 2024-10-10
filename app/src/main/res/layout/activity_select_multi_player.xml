@@ -12,12 +12,13 @@
         style="@style/heading"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/selectPlayer"
+        android:text="@string/selectPlayers"
+        android:textColor="@color/delftBlue"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.12" />
+        app:layout_constraintVertical_bias="0.08" />
 
     <TextView
         android:id="@+id/textViewPlayerOneLabel"
@@ -28,67 +29,88 @@
         android:textAllCaps="true"
         android:textSize="16sp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/spinnerPlayerOneName"
         app:layout_constraintTop_toBottomOf="@+id/textViewSelectMultiPlayer"
-        app:layout_constraintVertical_bias="0.062" />
+        app:layout_constraintVertical_bias="0.04" />
 
     <Spinner
         android:id="@+id/spinnerPlayerOneName"
         style="@style/CustomSpinnerStyle"
         android:layout_width="300dp"
+        android:layout_marginStart="56dp"
+        android:layout_marginEnd="55dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textViewPlayerOneLabel"
-        app:layout_constraintVertical_bias="0.02
-" />
+        app:layout_constraintVertical_bias="0.02" />
 
     <TextView
         android:id="@+id/textViewPlayerTwoLabel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="284dp"
         android:fontFamily="@font/roboto_medium"
         android:text="@string/playerTwo"
         android:textAllCaps="true"
         android:textSize="16sp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="@+id/spinnerPlayerTwoName"
         app:layout_constraintTop_toBottomOf="@+id/spinnerPlayerOneName"
-        app:layout_constraintVertical_bias="0.08" />
+        app:layout_constraintVertical_bias="0.06" />
 
     <Spinner
         android:id="@+id/spinnerPlayerTwoName"
         style="@style/CustomSpinnerStyle"
         android:layout_width="300dp"
+        android:layout_marginStart="56dp"
+        android:layout_marginTop="6dp"
+        android:layout_marginEnd="55dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textViewPlayerTwoLabel"
-        app:layout_constraintVertical_bias="0.02
-" />
+        app:layout_constraintVertical_bias="0.02" />
 
     <Button
         android:id="@+id/buttonPlayGameMultiplayer"
         style="@style/buttonPrimary"
+        android:layout_height="64dp"
         android:text="@string/play"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:textSize="22sp"
+        app:layout_constraintBottom_toTopOf="@+id/buttonAddNewMultiPlayer"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/spinnerPlayerTwoName"
-        app:layout_constraintVertical_bias="0.18" />
+        app:layout_constraintVertical_bias="0.32"
+        app:layout_constraintVertical_chainStyle="packed" />
 
     <Button
         android:id="@+id/buttonAddNewMultiPlayer"
         style="@style/buttonSecondary"
+        android:layout_height="64dp"
+        android:layout_marginTop="18dp"
+        android:layout_marginBottom="18dp"
+        android:backgroundTint="@color/delftBlue"
         android:text="@string/addNewPlayer"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:textSize="22sp"
+        app:layout_constraintBottom_toTopOf="@+id/buttonMultiPlayerBackToSetup"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/buttonPlayGameMultiplayer"
         app:layout_constraintVertical_bias="0.24000001" />
+
+    <Button
+        android:id="@+id/buttonMultiPlayerBackToSetup"
+        style="@style/buttonSecondary"
+        android:layout_height="64dp"
+        android:text="@string/buttonGameSetup"
+        android:textSize="22sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/buttonAddNewMultiPlayer" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
