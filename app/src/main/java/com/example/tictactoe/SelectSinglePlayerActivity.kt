@@ -78,6 +78,11 @@ class SelectSinglePlayerActivity : AppCompatActivity() {
 
     private fun handlePlayGameVsAndroid() {
         // Start game play activity
+        val sharedPreferences = getSharedPreferences("GamePrefs", MODE_PRIVATE)
+        val editor = sharedPreferences.edit()
+        editor.putString("gameMode", "singlePlayer")
+        editor.apply()
+
         val intent = Intent(this, PlayGameActivity::class.java)
         startActivity(intent)
     }
@@ -124,7 +129,3 @@ class SelectSinglePlayerActivity : AppCompatActivity() {
         }
     }
 }
-
-// TODO 2: Commit those changes. Make new branch for refactoring
-// TODO 3: Consider how you can refactor to make the code less repetitive
-// TODO 4: Commit those changes. Make new branch for game play against android

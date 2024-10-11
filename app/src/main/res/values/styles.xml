@@ -66,4 +66,15 @@
         <item name="android:layout_height">5dp</item>
     </style>
 
+    <style name="boardCell">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:fontFamily">@font/baloo</item>
+        <item name="android:gravity">center_vertical</item>
+        <item name="android:textAlignment">center</item>
+        <item name="android:textSize">72sp</item>
+        <item name="android:clickable">true</item>
+    </style>
+
 </resources>

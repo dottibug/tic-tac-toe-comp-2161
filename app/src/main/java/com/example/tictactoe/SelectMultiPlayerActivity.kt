@@ -101,6 +101,10 @@ class SelectMultiPlayerActivity : AppCompatActivity() {
             return
         } else {
             // Start game play activity if the players are different
+            val editor = sharedPreferences.edit()
+            editor.putString("gameMode", "multiPlayer")
+            editor.apply()
+
             val intent = Intent(this, PlayGameActivity::class.java)
             startActivity(intent)
         }

@@ -99,18 +99,10 @@
             android:layout_weight="1"
             android:orientation="horizontal">
 
-            <Button
-                android:id="@+id/button2"
-                style="@style/buttonColumn"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:paddingLeft="0dp"
-                android:paddingTop="0dp"
-                android:paddingRight="0dp"
-                android:paddingBottom="0dp"
-                android:text="X"
-                android:textColor="@color/moonstone" />
+            <TextView
+                android:id="@+id/textViewCell00"
+                style="@style/boardCell"
+                android:hint="•" />
 
             <View
                 android:id="@+id/colDivider1"
@@ -119,18 +111,13 @@
                 android:layout_weight="0"
                 android:background="@color/delftBlue" />
 
-            <Button
-                android:id="@+id/button3"
-                style="@style/buttonColumn"
+            <TextView
+                android:id="@+id/textViewCell01"
+                style="@style/boardCell"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:paddingLeft="0dp"
-                android:paddingTop="0dp"
-                android:paddingRight="0dp"
-                android:paddingBottom="0dp"
-                android:text="X"
-                android:textColor="@color/moonstone" />
+                android:hint="•" />
 
             <View
                 android:id="@+id/colDivider2"
@@ -139,18 +126,13 @@
                 android:layout_weight="0"
                 android:background="@color/delftBlue" />
 
-            <Button
-                android:id="@+id/button4"
-                style="@style/buttonColumn"
+            <TextView
+                android:id="@+id/textViewCell02"
+                style="@style/boardCell"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:paddingLeft="0dp"
-                android:paddingTop="0dp"
-                android:paddingRight="0dp"
-                android:paddingBottom="0dp"
-                android:text="X"
-                android:textColor="@color/moonstone" />
+                android:hint="•" />
 
         </LinearLayout>
 
@@ -169,18 +151,13 @@
             android:layout_weight="1"
             android:orientation="horizontal">
 
-            <Button
-                android:id="@+id/button5"
-                style="@style/buttonColumn"
+            <TextView
+                android:id="@+id/textViewCell10"
+                style="@style/boardCell"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:paddingLeft="0dp"
-                android:paddingTop="0dp"
-                android:paddingRight="0dp"
-                android:paddingBottom="0dp"
-                android:text="O"
-                android:textColor="@color/pumpkin" />
+                android:hint="•" />
 
             <View
                 android:id="@+id/colDivider3"
@@ -189,18 +166,13 @@
                 android:layout_weight="0"
                 android:background="@color/delftBlue" />
 
-            <Button
-                android:id="@+id/button6"
-                style="@style/buttonColumn"
+            <TextView
+                android:id="@+id/textViewCell11"
+                style="@style/boardCell"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:paddingLeft="0dp"
-                android:paddingTop="0dp"
-                android:paddingRight="0dp"
-                android:paddingBottom="0dp"
-                android:text="O"
-                android:textColor="@color/pumpkin" />
+                android:hint="•" />
 
             <View
                 android:id="@+id/colDivider4"
@@ -209,18 +181,13 @@
                 android:layout_weight="0"
                 android:background="@color/delftBlue" />
 
-            <Button
-                android:id="@+id/button7"
-                style="@style/buttonColumn"
+            <TextView
+                android:id="@+id/textViewCell12"
+                style="@style/boardCell"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:paddingLeft="0dp"
-                android:paddingTop="0dp"
-                android:paddingRight="0dp"
-                android:paddingBottom="0dp"
-                android:text="O"
-                android:textColor="@color/pumpkin" />
+                android:hint="•" />
 
         </LinearLayout>
 
@@ -239,18 +206,13 @@
             android:layout_weight="1"
             android:orientation="horizontal">
 
-            <Button
-                android:id="@+id/button8"
-                style="@style/buttonColumn"
+            <TextView
+                android:id="@+id/textViewCell20"
+                style="@style/boardCell"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:paddingLeft="0dp"
-                android:paddingTop="0dp"
-                android:paddingRight="0dp"
-                android:paddingBottom="0dp"
-                android:text="X"
-                android:textColor="@color/moonstone" />
+                android:hint="•" />
 
             <View
                 android:id="@+id/colDivider5"
@@ -259,18 +221,13 @@
                 android:layout_weight="0"
                 android:background="@color/delftBlue" />
 
-            <Button
-                android:id="@+id/button10"
-                style="@style/buttonColumn"
+            <TextView
+                android:id="@+id/textViewCell21"
+                style="@style/boardCell"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:paddingLeft="0dp"
-                android:paddingTop="0dp"
-                android:paddingRight="0dp"
-                android:paddingBottom="0dp"
-                android:text="X"
-                android:textColor="@color/moonstone" />
+                android:hint="•" />
 
             <View
                 android:id="@+id/colDivider6"
@@ -279,18 +236,14 @@
                 android:layout_weight="0"
                 android:background="@color/delftBlue" />
 
-            <Button
-                android:id="@+id/button9"
-                style="@style/buttonColumn"
+            <TextView
+                android:id="@+id/textViewCell22"
+                style="@style/boardCell"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:paddingLeft="0dp"
-                android:paddingTop="0dp"
-                android:paddingRight="0dp"
-                android:paddingBottom="0dp"
-                android:text="X"
-                android:textColor="@color/moonstone" />
+                android:hint="•" />
+
         </LinearLayout>
 
     </LinearLayout>
