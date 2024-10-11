@@ -29,17 +29,15 @@ class SelectSinglePlayerActivity : AppCompatActivity() {
             insets
         }
 
-        // TODO If no player names are entered to select from, show a dialog to enter them
-        //  (player names list should be updated with the new names)
-
         // Asynchronously get the list of players from the local game data file
         playerManager.asyncGetPlayers(this) { players ->
             populateMenu(players)
             setupSpinnerListener()
         }
 
-        binding.buttonSinglePlayerBackToSetup.setOnClickListener { finish() }
         binding.buttonPlayGameSingle.setOnClickListener { handlePlayGameVsAndroid() }
+        binding.buttonAddNewSinglePlayer.setOnClickListener { handleAddNewPlayer() }
+        binding.buttonSinglePlayerBackToSetup.setOnClickListener { finish() }
     }
 
     // Populate the spinner with the player names from the local game data file
@@ -83,6 +81,50 @@ class SelectSinglePlayerActivity : AppCompatActivity() {
         val intent = Intent(this, PlayGameActivity::class.java)
         startActivity(intent)
     }
+
+    private fun handleAddNewPlayer() {
+        val intent = Intent(this, GameSetupAddNewPlayerActivity::class.java)
+        startActivity(intent)
+    }
+
+    // Update the player list when the user comes back from the GameSetupAddNewPlayerActivity
+    override fun onResume() {
+        super.onResume()
+        val sharedPreferences = getSharedPreferences("GamePrefs", MODE_PRIVATE)
+        val newPlayerAdded = sharedPreferences.getBoolean("newPlayerAdded", false)
+
+        if (newPlayerAdded) {
+            updatePlayerList()
+            sharedPreferences.edit().putBoolean("newPlayerAdded", false).apply()
+        }
+    }
+
+    // Asynchronously get the list of players from the local game data file and update the player list
+    // Select the newly added player by default
+    private fun updatePlayerList() {
+        playerManager.asyncGetPlayers(this) { players ->
+            populateMenu(players)
+            setupSpinnerListener()
+            selectedNewlyAddedPlayer()
+        }
+    }
+
+    // Select the newly added player by default in the spinner
+    private fun selectedNewlyAddedPlayer() {
+        val sharedPreferences = getSharedPreferences("GamePrefs", MODE_PRIVATE)
+        val lastAddedPlayer = sharedPreferences.getString("lastAddedPlayer", null)
+
+        if (lastAddedPlayer != null) {
+            val position = (binding.spinnerSinglePlayerName.adapter as ArrayAdapter<String>).getPosition(lastAddedPlayer)
+            if (position != -1) {
+                binding.spinnerSinglePlayerName.setSelection(position)
+            }
+            // Clear the lastAddedPlayer from preferences
+            sharedPreferences.edit().remove("lastAddedPlayer").apply()
+        }
+    }
 }
 
-// TODO NEXT: Handle entering a new player name on this screen (implement on multiple player activity, too)
+// TODO 2: Commit those changes. Make new branch for refactoring
+// TODO 3: Consider how you can refactor to make the code less repetitive
+// TODO 4: Commit those changes. Make new branch for game play against android

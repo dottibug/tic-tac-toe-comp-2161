@@ -43,6 +43,7 @@ class SelectMultiPlayerActivity : AppCompatActivity() {
         }
 
         binding.buttonMultiPlayerBackToSetup.setOnClickListener { finish() }
+        binding.buttonAddNewMultiPlayer.setOnClickListener { handleAddNewPlayer() }
         binding.buttonPlayGameMultiplayer.setOnClickListener { handlePlayGameVsPlayers() }
     }
 
@@ -78,8 +79,6 @@ class SelectMultiPlayerActivity : AppCompatActivity() {
         }
     }
 
-    // playerNumber = playerOne or playerTwo
-
     // Save the selected players to shared preferences as selectedPlayerOne and selectedPlayerTwo
     private fun saveSelectedPlayer(selectedPlayer: String, playerNumber: String) {
         val sharedPreferences = getSharedPreferences("GamePrefs", MODE_PRIVATE)
@@ -104,6 +103,30 @@ class SelectMultiPlayerActivity : AppCompatActivity() {
             // Start game play activity if the players are different
             val intent = Intent(this, PlayGameActivity::class.java)
             startActivity(intent)
+        }
+    }
+
+    private fun handleAddNewPlayer() {
+        val intent = Intent(this, GameSetupAddNewPlayerActivity::class.java)
+        startActivity(intent)
+    }
+
+    override fun onResume() {
+        super.onResume()
+        val sharedPreferences = getSharedPreferences("GamePrefs", MODE_PRIVATE)
+        val newPlayerAdded = sharedPreferences.getBoolean("newPlayerAdded", false)
+
+        if (newPlayerAdded) {
+            updatePlayerList()
+            sharedPreferences.edit().putBoolean("newPlayerAdded", false).apply()
+        }
+    }
+
+    private fun updatePlayerList() {
+        playerManager.asyncGetPlayers(this) { players ->
+            populateMenus(players)
+            setupSpinnerListener(spinnerPlayerOne, "PlayerOne")
+            setupSpinnerListener(spinnerPlayerTwo, "PlayerTwo")
         }
     }
 }
