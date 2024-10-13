@@ -31,12 +31,13 @@ class MainActivity : AppCompatActivity() {
         binding.buttonPlayerNames.setOnClickListener { onPlayerNamesClick() }
         binding.buttonNewGame.setOnClickListener { onNewGameClick() }
         binding.buttonStandings.setOnClickListener { onStandingsClick() }
+        binding.buttonSettings.setOnClickListener { onSettingsClick() }
     }
 
     // Set up the local game data file
     private fun setupPlayerDataFile() {
         // NOTE: Dev purposes only (to delete local file when testing)
-        // playerManager.deletePlayerDataFile(this)
+//         playerManager.deletePlayerDataFile(this)
 
         playerManager.createPlayerDataFile(this)
     }
@@ -56,6 +57,12 @@ class MainActivity : AppCompatActivity() {
     // Start the StandingsActivity to view player standings from the local game data file
     private fun onStandingsClick() {
         val intent = Intent(this, StandingsActivity::class.java)
+        startActivity(intent)
+    }
+
+    // Start the SettingsActivity to change game settings
+    private fun onSettingsClick() {
+        val intent = Intent(this, SettingsActivity::class.java)
         startActivity(intent)
     }
 

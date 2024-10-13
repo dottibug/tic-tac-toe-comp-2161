@@ -45,6 +45,9 @@ class SelectSinglePlayerActivity : AppCompatActivity() {
         // Extract player names from the list
         val playerNames = players.map { it.name }.toMutableList()
 
+        // Remove "Android" from the list
+        playerNames.remove("Android")
+
         // Remove generic "Player Two" from the list
         if ("Player Two" in playerNames) {
             playerNames.remove("Player Two")

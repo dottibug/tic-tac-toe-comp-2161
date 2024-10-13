@@ -1,0 +1,25 @@
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <PreferenceCategory app:title="@string/gameSettings">
+
+        <ListPreference
+            app:defaultValue="Easy"
+            app:entries="@array/difficultyLevel"
+            app:entryValues="@array/difficultyLevel"
+            app:key="difficulty"
+            app:title="@string/difficulty"
+            app:useSimpleSummaryProvider="true" />
+    </PreferenceCategory>
+
+
+    <PreferenceCategory app:title="@string/displaySettings">
+        <SwitchPreference
+            app:defaultValue="false"
+            app:key="darkMode"
+            app:summaryOff="@string/darkModeOff"
+            app:summaryOn="@string/darkModeOn"
+            app:title="@string/darkMode" />
+    </PreferenceCategory>
+
+</PreferenceScreen>

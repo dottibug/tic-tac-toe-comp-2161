@@ -1,5 +1,6 @@
 package com.example.tictactoe
 
+import android.content.Intent
 import android.os.Bundle
 import android.widget.ListView
 import androidx.activity.enableEdgeToEdge
@@ -29,17 +30,41 @@ class StandingsActivity : AppCompatActivity() {
             insets
         }
 
-        // Asynchronously get the list of players from the local game data file
-        playerManager.asyncGetPlayers(this) { players -> populateListView(players) }
-
         standingsList = binding.listViewStandings
         binding.buttonStandingsHome.setOnClickListener { finish() }
+        binding.buttonManagePlayers.setOnClickListener { handleManagePlayersClick() }
+
+        // Asynchronously get the list of players from the local game data file
+        refreshStandings()
     }
 
     // Populate the standings list view with the players from the local game data file
     private fun populateListView(players: List<Player>) {
-        val standingsListViewAdapter = StandingsListViewAdapter(this, players)
+        // Remove "Player One" and "Player Two" from the list
+        val filteredPlayers = players.filter { it.name != "Player One" && it.name != "Player Two" }
+
+        // Sort the players by name in alphabetical order
+        val orderedPlayers = filteredPlayers.sortedBy { it.name }
+
+        val standingsListViewAdapter = StandingsListViewAdapter(this, orderedPlayers)
         standingsList.adapter = standingsListViewAdapter
+    }
+
+    // Handle the click event for the "Manage Players" button
+    private fun handleManagePlayersClick() {
+        val intent = Intent(this, ManagePlayersActivity::class.java)
+        startActivity(intent)
+    }
+
+    // Refresh the standings list view when the activity is resumed
+    override fun onResume() {
+        super.onResume()
+        refreshStandings()
+    }
+
+    // Refresh the standings list view by asynchronously getting the players from the local game data file
+    private fun refreshStandings() {
+        playerManager.asyncGetPlayers(this) { players -> populateListView(players) }
     }
 
 }

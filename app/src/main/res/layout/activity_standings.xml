@@ -5,6 +5,9 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:paddingStart="12dp"
+    android:paddingEnd="12dp"
+    android:paddingBottom="12dp"
     tools:context=".StandingsActivity">
 
     <TextView
@@ -20,106 +23,159 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.08" />
+        app:layout_constraintVertical_bias="0.06" />
 
-    <LinearLayout
-        android:id="@+id/linearLayout2"
-        android:layout_width="match_parent"
+    <HorizontalScrollView
+        android:id="@+id/horizontalScrollView"
+        android:layout_width="360dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="18dp"
-        android:layout_marginEnd="18dp"
-        android:background="@drawable/standings_table_header"
-        android:orientation="horizontal"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textViewStandingsTitle"
-        app:layout_constraintVertical_bias="0.06">
+        app:layout_constraintVertical_bias="0.12">
 
-        <TextView
-            android:id="@+id/textViewPlayer"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="2.25"
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
             android:background="@android:color/transparent"
-            android:fontFamily="@font/roboto_medium"
-            android:text="@string/player"
-            android:textAllCaps="true"
-            android:textColor="@color/snow"
-            android:textSize="18sp"
-            android:textStyle="bold" />
+            android:orientation="vertical">
 
-        <TextView
-            android:id="@+id/textViewGamesWon"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:background="@android:color/transparent"
-            android:fontFamily="@font/roboto_medium"
-            android:text="@string/gamesWon"
-            android:textAlignment="center"
-            android:textAllCaps="true"
-            android:textColor="@color/snow"
-            android:textSize="18sp"
-            android:textStyle="bold" />
+            <LinearLayout
+                android:id="@+id/linearLayout2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@color/delftBlue"
+                android:orientation="horizontal"
+                android:paddingStart="12dp"
+                android:paddingTop="12dp"
+                android:paddingEnd="12dp"
+                android:paddingBottom="12dp">
 
-        <TextView
-            android:id="@+id/textViewGamesPlayed"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:background="@android:color/transparent"
-            android:fontFamily="@font/roboto_medium"
-            android:text="@string/gamesPlayed"
-            android:textAlignment="center"
-            android:textAllCaps="true"
-            android:textColor="@color/snow"
-            android:textSize="18sp"
-            android:textStyle="bold" />
+                <TextView
+                    android:id="@+id/textViewPlayer"
+                    android:layout_width="150dp"
+                    android:layout_height="wrap_content"
+                    android:background="@android:color/transparent"
+                    android:fontFamily="@font/roboto_medium"
+                    android:text="@string/player"
+                    android:textAllCaps="true"
+                    android:textColor="@color/snow"
+                    android:textSize="18sp"
+                    android:textStyle="bold" />
 
-        <TextView
-            android:id="@+id/textViewWinPercentage"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:background="@android:color/transparent"
-            android:fontFamily="@font/roboto_medium"
-            android:text="@string/winPercentage"
-            android:textAlignment="textEnd"
-            android:textAllCaps="true"
-            android:textColor="@color/snow"
-            android:textSize="18sp"
-            android:textStyle="bold" />
-    </LinearLayout>
+                <TextView
+                    android:id="@+id/textViewTotal"
+                    android:layout_width="90dp"
+                    android:layout_height="wrap_content"
+                    android:background="@android:color/transparent"
+                    android:fontFamily="@font/roboto_medium"
+                    android:text="@string/total"
+                    android:textAlignment="center"
+                    android:textAllCaps="true"
+                    android:textColor="@color/snow"
+                    android:textSize="18sp"
+                    android:textStyle="bold" />
 
-    <ListView
-        android:id="@+id/listViewStandings"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="18dp"
-        android:layout_marginTop="-2dp"
-        android:layout_marginEnd="18dp"
-        android:layout_marginBottom="32dp"
-        android:background="@drawable/standing_table_body"
-        android:maxHeight="290dp"
-        android:padding="8dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout2"
-        app:layout_constraintVertical_bias="0.0"
-        tools:layout_height="290dp"
-        tools:listitem="@layout/custom_list_item" />
+                <TextView
+                    android:id="@+id/textViewLosses"
+                    android:layout_width="90dp"
+                    android:layout_height="wrap_content"
+                    android:background="@android:color/transparent"
+                    android:fontFamily="@font/roboto_medium"
+                    android:text="@string/losses"
+                    android:textAlignment="center"
+                    android:textAllCaps="true"
+                    android:textColor="@color/snow"
+                    android:textSize="18sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/textViewTies"
+                    android:layout_width="90dp"
+                    android:layout_height="wrap_content"
+                    android:background="@android:color/transparent"
+                    android:fontFamily="@font/roboto_medium"
+                    android:text="@string/ties"
+                    android:textAlignment="center"
+                    android:textAllCaps="true"
+                    android:textColor="@color/snow"
+                    android:textSize="18sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/textViewWins"
+                    android:layout_width="90dp"
+                    android:layout_height="wrap_content"
+                    android:background="@android:color/transparent"
+                    android:fontFamily="@font/roboto_medium"
+                    android:text="@string/wins"
+                    android:textAlignment="center"
+                    android:textAllCaps="true"
+                    android:textColor="@color/snow"
+                    android:textSize="18sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/textViewWinPercentage"
+                    android:layout_width="90dp"
+                    android:layout_height="wrap_content"
+                    android:background="@android:color/transparent"
+                    android:fontFamily="@font/roboto_medium"
+                    android:text="@string/winPercentage"
+                    android:textAlignment="center"
+                    android:textAllCaps="true"
+                    android:textColor="@color/snow"
+                    android:textSize="18sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/textViewLastPlayed"
+                    android:layout_width="150dp"
+                    android:layout_height="wrap_content"
+                    android:background="@android:color/transparent"
+                    android:fontFamily="@font/roboto_medium"
+                    android:text="@string/lastPlayed"
+                    android:textAlignment="center"
+                    android:textAllCaps="true"
+                    android:textColor="@color/snow"
+                    android:textSize="18sp"
+                    android:textStyle="bold" />
+            </LinearLayout>
+
+            <ListView
+                android:id="@+id/listViewStandings"
+                android:layout_width="wrap_content"
+                android:layout_height="290dp"
+                android:background="@android:color/transparent"
+                android:maxHeight="290dp"
+                tools:layout_height="290dp"
+                tools:listitem="@layout/custom_list_item" />
+
+        </LinearLayout>
+    </HorizontalScrollView>
 
     <Button
         android:id="@+id/buttonStandingsHome"
         style="@style/buttonPrimary"
-        android:backgroundTint="@color/delftBlue"
+        android:backgroundTint="@color/moonstone"
         android:text="@string/buttonHome"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/listViewStandings"
+        app:layout_constraintTop_toBottomOf="@+id/buttonManagePlayers"
         app:layout_constraintVertical_bias="0.18" />
+
+    <Button
+        android:id="@+id/buttonManagePlayers"
+        style="@style/buttonPrimary"
+        android:layout_height="64dp"
+        android:text="@string/managePlayers"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/horizontalScrollView"
+        app:layout_constraintVertical_bias="0.24" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

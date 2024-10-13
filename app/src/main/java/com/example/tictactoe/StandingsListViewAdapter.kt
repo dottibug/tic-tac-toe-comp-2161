@@ -1,7 +1,6 @@
 package com.example.tictactoe
 
 import android.content.Context
-import android.icu.text.DecimalFormat
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -11,31 +10,34 @@ import android.widget.TextView
 // StandingsListViewAdapter class for customizing the layout of each list item in the standings list view
 class StandingsListViewAdapter(context: Context, playerList: List<Player>) : ArrayAdapter<Player>(context, 0, playerList) {
 
-    private val percentFormat = DecimalFormat("#.##'%'")
-
     // Override the getView() method to customize the layout for each list item
     override fun getView(position: Int, convertView: View?, parent: ViewGroup): View {
         // Inflate the custom layout for the list item
         val itemView = convertView ?: LayoutInflater.from(context).inflate(R.layout.custom_list_item, parent, false)
         val item = getItem(position)
 
-        val playerName: TextView = itemView.findViewById(R.id.textViewListItemPlayer)
-        playerName.text = item?.name
+        // name, totalGames, losses, ties, wins, winPercentage, lastPlayed
+        val name: TextView = itemView.findViewById(R.id.textViewListItemPlayer)
+        name.text = item?.name
 
-        val gamesWon: TextView = itemView.findViewById(R.id.textViewListItemWon)
-        gamesWon.text = item?.gamesWon.toString()
+        val total: TextView = itemView.findViewById(R.id.textViewListItemTotal)
+        total.text = item?.totalGames.toString()
 
-        val gamesPlayed: TextView = itemView.findViewById(R.id.textViewListItemPlayed)
-        gamesPlayed.text = item?.gamesPlayed.toString()
+        val losses: TextView = itemView.findViewById(R.id.textViewListItemLosses)
+        losses.text = item?.losses.toString()
+
+        val ties: TextView = itemView.findViewById(R.id.textViewListItemTies)
+        ties.text = item?.ties.toString()
+
+        val wins: TextView = itemView.findViewById(R.id.textViewListItemWins)
+        wins.text = item?.wins.toString()
 
         val winPercentage: TextView = itemView.findViewById(R.id.textViewListItemWinPercentage)
-        winPercentage.text = formatPercentage(item?.winPercentage ?: 0.0)
+        winPercentage.text = item?.winPercentage
+
+        val lastPlayed: TextView = itemView.findViewById(R.id.textViewListItemLastPlayed)
+        lastPlayed.text = item?.lastPlayed
 
         return itemView
-    }
-
-    // Format the win percentage to display as a percentage with up to two decimal places
-    private fun formatPercentage(winPercentage: Double): String {
-        return percentFormat.format(winPercentage)
     }
 }

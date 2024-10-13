@@ -49,9 +49,11 @@ class SelectMultiPlayerActivity : AppCompatActivity() {
 
     // Populate the spinners with the player names from the local game data file
     private fun populateMenus(players: List<Player>) {
+        val playersList = players.map { it.name }.toMutableList().apply { remove("Android") }
+
         // Extract player names from the list
-        val playerOneNames = players.map { it.name }.toMutableList().apply { remove("Player Two") }
-        val playerTwoNames = players.map { it.name }.toMutableList().apply { remove("Player One") }
+        val playerOneNames = playersList.toMutableList().apply { remove("Player Two") }
+        val playerTwoNames = playersList.toMutableList().apply { remove("Player One") }
 
         // Populate the spinners with the player names
         setupSpinnerAdapter(playerOneNames, spinnerPlayerOne)

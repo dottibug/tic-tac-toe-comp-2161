@@ -19,7 +19,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.06" />
+        app:layout_constraintVertical_bias="0.03" />
 
     <TextView
         android:id="@+id/textViewTac"
@@ -55,36 +55,50 @@
         android:id="@+id/buttonPlayerNames"
         style="@style/buttonPrimary"
         android:layout_width="300dp"
-        android:layout_height="72dp"
-        android:text="@string/playerNames"
+        android:layout_height="64dp"
+        android:text="@string/addPlayer"
+        android:textSize="22sp"
         app:layout_constraintBottom_toTopOf="@+id/buttonNewGame"
-        app:layout_constraintEnd_toEndOf="@+id/buttonNewGame"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="@+id/buttonNewGame"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textViewToe"
-        app:layout_constraintVertical_bias="0.24"
+        app:layout_constraintVertical_bias="0.18"
         app:layout_constraintVertical_chainStyle="packed" />
 
     <Button
         android:id="@+id/buttonNewGame"
         style="@style/buttonPrimary"
-        android:layout_marginTop="18dp"
-        android:layout_marginBottom="18dp"
+        android:layout_height="64dp"
+        android:layout_marginTop="12dp"
         android:text="@string/playGame"
+        android:textSize="22sp"
         app:layout_constraintBottom_toTopOf="@+id/buttonStandings"
-        app:layout_constraintEnd_toEndOf="@+id/buttonStandings"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="@+id/buttonStandings"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/buttonPlayerNames" />
 
     <Button
         android:id="@+id/buttonStandings"
         style="@style/buttonPrimary"
+        android:layout_height="64dp"
+        android:layout_marginTop="12dp"
+        android:layout_marginBottom="12dp"
         android:text="@string/standings"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:textSize="22sp"
+        app:layout_constraintBottom_toTopOf="@+id/buttonSettings"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/buttonNewGame" />
+
+    <Button
+        android:id="@+id/buttonSettings"
+        style="@style/buttonPrimary"
+        android:layout_height="64dp"
+        android:text="@string/settings"
+        android:textSize="22sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/buttonStandings" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

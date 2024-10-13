@@ -8,18 +8,23 @@ import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import androidx.preference.PreferenceManager
 import com.example.tictactoe.databinding.ActivityPlayGameBinding
 
 class PlayGameActivity : AppCompatActivity() {
-    private lateinit var sharedPreferences: SharedPreferences
     private lateinit var binding: ActivityPlayGameBinding
+    private lateinit var gameSettings: SharedPreferences
+    private val playerManager = PlayerManager()
+    private var androidTurnTask: AsyncAndroidTurn? = null
     private lateinit var gameBoard: Array<Array<String>> // 3x3 game board represented as a 2D array of strings
     private lateinit var boardCells: Array<TextView>
     private lateinit var gameMode: String
+    private lateinit var difficulty: String
     private lateinit var playerOne: String
     private lateinit var playerTwo: String
     private lateinit var currentPlayer: String
     private lateinit var currentToken: String
+    private lateinit var winningCells: List<Int>
 
     // NOTE: Testing purposes for now
     private val appUtils = AppUtils()
@@ -37,7 +42,7 @@ class PlayGameActivity : AppCompatActivity() {
             insets
         }
 
-        sharedPreferences = getSharedPreferences("GamePrefs", MODE_PRIVATE)
+        gameSettings = getSharedPreferences("GamePrefs", MODE_PRIVATE)
 
         binding.buttonGameGoToMainMenu.setOnClickListener { navigateToHome() }
         binding.buttonRestart.setOnClickListener { showRestartDialog() }
@@ -50,6 +55,11 @@ class PlayGameActivity : AppCompatActivity() {
 
         setupGame()
         setupCellListeners()
+
+        if (gameMode == "singlePlayer") {
+            difficulty =
+                PreferenceManager.getDefaultSharedPreferences(this).getString("difficulty", "Easy").toString()
+        }
     }
 
     private fun setupGame() {
@@ -61,16 +71,16 @@ class PlayGameActivity : AppCompatActivity() {
 
     // Set game mode
     private fun setGameMode() {
-        gameMode = sharedPreferences.getString("gameMode", "singlePlayer") ?: "singlePlayer"
+        gameMode = gameSettings.getString("gameMode", "").toString()
     }
 
     private fun setPlayers() {
         if (gameMode == "singlePlayer") {
-            playerOne = sharedPreferences.getString("selectedSinglePlayer", "Player One") ?: "Player One"
+            playerOne = gameSettings.getString("selectedSinglePlayer", "Player One") ?: "Player One"
             playerTwo = "Android"
         } else {
-            playerOne = sharedPreferences.getString("selectedPlayerOne", "Player One") ?: "Player One"
-            playerTwo = sharedPreferences.getString("selectedPlayerTwo", "Player Two") ?: "Player Two"
+            playerOne = gameSettings.getString("selectedPlayerOne", "Player One") ?: "Player One"
+            playerTwo = gameSettings.getString("selectedPlayerTwo", "Player Two") ?: "Player Two"
         }
     }
 
@@ -78,6 +88,10 @@ class PlayGameActivity : AppCompatActivity() {
     private fun setupFirstPlayer() {
         currentPlayer = playerOne
         currentToken = "X"
+        setPlayerTurn()
+    }
+
+    private fun setPlayerTurn() {
         binding.textViewPlayerTurn.text = String.format(getString(R.string.playerTurn), currentPlayer)
     }
 
@@ -101,9 +115,7 @@ class PlayGameActivity : AppCompatActivity() {
             val col = index % 3
 
             cell.setOnClickListener {
-                if (gameBoard[row][col].isEmpty()) {
-                    placeMarker(row, col)
-                }
+                if (gameBoard[row][col].isEmpty()) { placeMarker(row, col) }
             }
         }
     }
@@ -114,38 +126,51 @@ class PlayGameActivity : AppCompatActivity() {
         updateBoardUI()
 
         // Check for a win or draw
-        if (gameWon()) { endGame("$currentPlayer won!") }
+        if (gameWon()) {
+            highlightWinningCells()
+            endGame("$currentPlayer won!")
+        }
+
         else if (gameDraw()) { endGame("It's a draw!") }
 
         // Change current token and current player; initiate Android turn if single player mode
-        // TODO: add delay on android placeMarker update
         else {
             changeToken()
             updateCurrentPlayer()
-            if (gameMode == "singlePlayer" && currentToken == "O") {
-                AsyncAndroidTurn(gameBoard) { move ->
-                    runOnUiThread {
-                        placeMarker(move.first, move.second)
-                    }
-                }.execute()
-            }
+            if (gameMode == "singlePlayer" && currentToken == "O") { startAndroidTurn() }
         }
-
     }
 
     // Flatten game board to change the text views of each cell
     private fun updateBoardUI() {
-        gameBoard.flatten().forEachIndexed { index, token ->
-            boardCells[index].text = token
-        }
+        gameBoard.flatten().forEachIndexed { index, token -> boardCells[index].text = token }
     }
 
-    private fun changeToken() {
-        currentToken = if (currentToken == "X") "O" else "X"
-    }
+    // Change current token to the opposite token
+    private fun changeToken() { currentToken = if (currentToken == "X") "O" else "X" }
 
+    // Change current player to the opposite player
     private fun updateCurrentPlayer() {
         currentPlayer = if (currentPlayer == playerOne) { playerTwo } else { playerOne }
+        setPlayerTurn()
+    }
+
+    // Enable/disable clicking on the board cells
+    private fun setBoardCellsEnabled(enabled: Boolean) {
+        boardCells.forEach { it.isEnabled = enabled }
+    }
+
+    // Start Android turn (background task)
+    private fun startAndroidTurn() {
+        setBoardCellsEnabled(false)
+
+        androidTurnTask = AsyncAndroidTurn(difficulty, gameBoard) { move ->
+            runOnUiThread {
+                setBoardCellsEnabled(true)
+                placeMarker(move.first, move.second)
+            }
+        }
+        androidTurnTask?.execute()
     }
 
     // game board array
@@ -154,36 +179,51 @@ class PlayGameActivity : AppCompatActivity() {
     // | [ 20, 21, 22 ]  |
 
     // Check if the game is won
+    // Sets the indices of the winning cells (0 to 8, to align with the boardCells array of textViews)
     private fun gameWon(): Boolean {
         // Check rows: If any row has all the same tokens, then the currentPlayer is the winner
-        // TODO: change color of the winning line
-        for (row in gameBoard) {
-            if (row.all { it == "X" } || row.all { it == "O" }) { return true }
+        for (row in 0..2) {
+            if (gameBoard[row].all { it == "X" } || gameBoard[row].all { it == "O" }) {
+                winningCells = listOf(row*3, row*3+1, row*3+2)
+                return true
+            }
         }
 
         // Check columns: If any column has all the same tokens, then the currentPlayer is the winner
-        // TODO: change color of the winning line
         for (col in 0..2) {
             if (gameBoard[0][col].isNotEmpty() && gameBoard[1][col].isNotEmpty() && gameBoard[2][col].isNotEmpty()) {
                 if (gameBoard[0][col] == gameBoard[1][col] && gameBoard[1][col] == gameBoard[2][col]) {
+                    winningCells = listOf(col, col+3, col+6)
                     return true
                 }
             }
-
         }
 
         // Check diagonals: If any diagonal has all the same tokens, then the currentPlayer is the winner
-        // TODO: change color of the winning line
+        // Diagonal top left to bottom right
         if (gameBoard[0][0].isNotEmpty() && gameBoard[1][1].isNotEmpty() && gameBoard[2][2].isNotEmpty()) {
-            if (gameBoard[0][0] == gameBoard[1][1] && gameBoard[1][1] == gameBoard[2][2]) { return true }
+            if (gameBoard[0][0] == gameBoard[1][1] && gameBoard[1][1] == gameBoard[2][2]) {
+                winningCells = listOf(0, 4, 8)
+                return true
+            }
         }
 
+        // Diagonal top right to bottom left
         if (gameBoard[0][2].isNotEmpty() && gameBoard[1][1].isNotEmpty() && gameBoard[2][0].isNotEmpty()) {
-            if (gameBoard[0][2] == gameBoard[1][1] && gameBoard[1][1] == gameBoard[2][0]) { return true }
+            if (gameBoard[0][2] == gameBoard[1][1] && gameBoard[1][1] == gameBoard[2][0]) {
+                winningCells = listOf(2, 4, 6)
+                return true
+            }
         }
 
         // No win condition is met
         return false
+    }
+
+    private fun highlightWinningCells() {
+        for (cellIndex in winningCells) {
+            boardCells[cellIndex].setTextColor(resources.getColor(R.color.pumpkin, theme))
+        }
     }
 
     // Check if the game is drawn: If board is full but the game was not won, then it is a draw
@@ -191,18 +231,36 @@ class PlayGameActivity : AppCompatActivity() {
         return gameBoard.flatten().all { it.isNotEmpty() }
     }
 
+    // End the game and update the player stats in the local game data file
     private fun endGame(message: String) {
+        when {
+            message.contains("won") -> {
+                playerManager.asyncUpdatePlayerStats(this, currentPlayer, "win")
+                playerManager.asyncUpdatePlayerStats(this, if (currentPlayer == playerOne) playerTwo else playerOne, "loss")
+            }
+
+            message.contains("draw") -> {
+                playerManager.asyncUpdatePlayerStats(this, playerOne, "tie")
+                playerManager.asyncUpdatePlayerStats(this, playerTwo, "tie")
+            }
+        }
+
         // NOTE: the toast is temporary for testing purposes
         appUtils.showToast(this, message)
 
-        // TODO Change restart button to a play again button; If pressed, make sure to change the button back to "restart"
-
         // Disable clicking on the board cells
+        setBoardCellsEnabled(false)
+
+
+
+        // TODO Change restart button to a play again button; If pressed, make sure to change the button back to "restart"
         // TODO Make sure to re-enable the board cells if the user presses "play again"
-        boardCells.forEach { it.isEnabled = false }
+        // TODO if "play again" clicked, make sure to reset the game board, current player, current token, and winnling lines
+
     }
 
     // Show the restart dialog
+    // TODO if "restart" confirmed, make sure to reset the game board, current player, current token, and winnling lines
     private fun showRestartDialog() {
         val restartDialog = RestartDialogFragment()
         restartDialog.show(supportFragmentManager, RestartDialogFragment.TAG)
@@ -214,9 +272,16 @@ class PlayGameActivity : AppCompatActivity() {
         startActivity(intent)
     }
 
+    // Cancel background task if the activity is destroyed
+    override fun onDestroy() {
+        super.onDestroy()
+        androidTurnTask?.cancel(true)
+    }
+
 }
 
-// TODO: Make android turn logic more intelligent.
-//      Instead of a random empty cell, have it block 2 Xs in a row/col/diagonal
-//      or go between two Xs in the same row/col/diagonal
-//      or place an O to win the game if it can.
+// TODO: Restart game logic and the play again/restart button changes
+
+// TODO: Data persistance on screen rotation
+
+// TODO: Done. Refactor, test, submit.
