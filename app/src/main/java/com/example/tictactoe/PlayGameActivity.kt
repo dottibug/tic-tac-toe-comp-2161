@@ -20,6 +20,7 @@ class PlayGameActivity : AppCompatActivity() {
     private val playerManager = PlayerManager()
     private var androidTurnTask: AsyncAndroidTurn? = null
     private lateinit var gameBoard: Array<Array<String>> // 3x3 game board represented as a 2D array of strings
+    private lateinit var defaultTextColorStateList: ColorStateList
     private lateinit var boardCells: Array<TextView>
     private lateinit var gameMode: String
     private lateinit var difficulty: String
@@ -27,9 +28,8 @@ class PlayGameActivity : AppCompatActivity() {
     private lateinit var playerTwo: String
     private lateinit var currentPlayer: String
     private lateinit var currentToken: String
-    private lateinit var winningCells: List<Int>
+    private var winningCells: List<Int> = emptyList()
     private var gameEnded = false
-    private lateinit var defaultTextColorStateList: ColorStateList
 
     // NOTE: Testing purposes for now
     private val appUtils = AppUtils()
@@ -58,11 +58,17 @@ class PlayGameActivity : AppCompatActivity() {
             binding.textViewCell20, binding.textViewCell21, binding.textViewCell22
         )
 
-        setupGame()
-        setupCellListeners()
-
         // Get the default text color state list of the board cells
         defaultTextColorStateList = boardCells[0].textColors
+
+        if (savedInstanceState == null) {
+            setupGame()
+        } else {
+            restoreGameState(savedInstanceState)
+        }
+
+//        setupGame()
+        setupCellListeners()
 
         if (gameMode == "singlePlayer") {
             difficulty =
@@ -70,11 +76,50 @@ class PlayGameActivity : AppCompatActivity() {
         }
     }
 
+    // Restore the game state from the saved instance state
+    private fun restoreGameState(savedInstanceState: Bundle) {
+        gameMode = savedInstanceState.getString("gameMode", "")
+        difficulty = savedInstanceState.getString("difficulty", "Easy")
+        playerOne = savedInstanceState.getString("playerOne", "Player One")
+        playerTwo = savedInstanceState.getString("playerTwo", "Player Two")
+        currentPlayer = savedInstanceState.getString("currentPlayer", "Player One")
+        currentToken = savedInstanceState.getString("currentToken", "X")
+        winningCells = savedInstanceState.getIntegerArrayList("winningCells") ?: emptyList()
+        gameEnded = savedInstanceState.getBoolean("gameEnded", false)
+
+        val flatBoard = savedInstanceState.getStringArrayList("gameBoard")
+        gameBoard = Array(3) { row ->
+            Array(3) { col ->
+                flatBoard?.get(row * 3 + col) ?: ""
+            }
+        }
+
+        updateBoardUI()
+
+        // If the game has ended, restore the highlighted winning cells and other win conditions
+        if (gameEnded) {
+            binding.buttonRestart.text = getString(R.string.buttonPlayAgain)
+            binding.buttonRestart.setOnClickListener { restartGame() }
+            setBoardCellsEnabled(false)
+            if (winningCells.isNotEmpty()) {
+                highlightWinningCells()
+                updateGameStatusText("$currentPlayer Won!")
+            } else {
+                updateGameStatusText("It's a Draw!")
+            }
+        } else {
+            setBoardCellsEnabled(true)
+            setPlayerTurn()
+        }
+    }
+
+    // Set up the game
     private fun setupGame() {
         setGameMode()
         setPlayers()
         setupFirstPlayer()
         setupGameBoard()
+        winningCells = emptyList()
     }
 
     // Set game mode
@@ -82,6 +127,7 @@ class PlayGameActivity : AppCompatActivity() {
         gameMode = gameSettings.getString("gameMode", "").toString()
     }
 
+    // Set player one and two for taking turns
     private fun setPlayers() {
         if (gameMode == "singlePlayer") {
             playerOne = gameSettings.getString("selectedSinglePlayer", "Player One") ?: "Player One"
@@ -248,11 +294,14 @@ class PlayGameActivity : AppCompatActivity() {
             message.contains("won") -> {
                 playerManager.asyncUpdatePlayerStats(this, currentPlayer, "win")
                 playerManager.asyncUpdatePlayerStats(this, if (currentPlayer == playerOne) playerTwo else playerOne, "loss")
+                highlightWinningCells()
+                updateGameStatusText("$currentPlayer Won!")
             }
 
             message.contains("draw") -> {
                 playerManager.asyncUpdatePlayerStats(this, playerOne, "tie")
                 playerManager.asyncUpdatePlayerStats(this, playerTwo, "tie")
+                updateGameStatusText("It's a Draw!")
             }
         }
 
@@ -276,11 +325,18 @@ class PlayGameActivity : AppCompatActivity() {
         setupFirstPlayer()
         updateBoardUI()
         setBoardCellsEnabled(true)
+        setPlayerTurn()
+        winningCells = emptyList()
 
         // Reset cell colors to the initial color
         boardCells.forEach { cell ->
             cell.setTextColor(defaultTextColorStateList)
         }
+    }
+
+    // Update the game status text
+    private fun updateGameStatusText(message: String) {
+        binding.textViewPlayerTurn.text = message
     }
 
     // Show the restart dialog
@@ -303,9 +359,16 @@ class PlayGameActivity : AppCompatActivity() {
         androidTurnTask?.cancel(true)
     }
 
+    override fun onSaveInstanceState(outState: Bundle) {
+        super.onSaveInstanceState(outState)
+        outState.putString("gameMode", gameMode)
+        outState.putString("difficulty", difficulty)
+        outState.putString("playerOne", playerOne)
+        outState.putString("playerTwo", playerTwo)
+        outState.putString("currentPlayer", currentPlayer)
+        outState.putString("currentToken", currentToken)
+        outState.putBoolean("gameEnded", gameEnded)
+        outState.putStringArrayList("gameBoard", ArrayList(gameBoard.flatten()))
+        outState.putIntegerArrayList("winningCells", ArrayList(winningCells))
+    }
 }
-
-
-// TODO: Data persistance on screen rotation: Entering player name, player selection, and game board
-
-// TODO: Done. Refactor, test, submit.
