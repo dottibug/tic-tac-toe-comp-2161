@@ -9,7 +9,7 @@
         android:id="@+id/linearLayout4"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="@color/snow"
+        android:background="?attr/android:background"
         android:orientation="vertical"
         android:paddingStart="32dp"
         android:paddingTop="16dp"
@@ -24,6 +24,7 @@
             android:fontFamily="@font/roboto_medium"
             android:text="@string/deleteAllPlayersInstructions"
             android:textAlignment="center"
+            android:textColorLink="?attr/colorAccent"
             android:textSize="22sp" />
 
         <Button
@@ -31,8 +32,9 @@
             style="@style/buttonPrimary"
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="32dp"
-            android:backgroundTint="@color/brick"
-            android:text="@string/confirmDeleteAllPlayers"/>
+            android:backgroundTint="?attr/colorError"
+            android:text="@string/confirmDeleteAllPlayers"
+            android:textColor="?attr/android:background" />
 
     </LinearLayout>
 

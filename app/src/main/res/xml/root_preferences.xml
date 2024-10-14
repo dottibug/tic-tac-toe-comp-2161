@@ -14,7 +14,7 @@
 
 
     <PreferenceCategory app:title="@string/displaySettings">
-        <SwitchPreference
+        <SwitchPreferenceCompat
             app:defaultValue="false"
             app:key="darkMode"
             app:summaryOff="@string/darkModeOff"

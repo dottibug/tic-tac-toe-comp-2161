@@ -4,8 +4,10 @@ import android.content.Intent
 import android.os.Bundle
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatDelegate
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import androidx.preference.PreferenceManager
 import com.example.tictactoe.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
@@ -26,6 +28,7 @@ class MainActivity : AppCompatActivity() {
         }
 
         setupPlayerDataFile()
+        setupDarkModePreference()
 
         // Set up the buttons
         binding.buttonPlayerNames.setOnClickListener { onPlayerNamesClick() }
@@ -64,6 +67,17 @@ class MainActivity : AppCompatActivity() {
     private fun onSettingsClick() {
         val intent = Intent(this, SettingsActivity::class.java)
         startActivity(intent)
+    }
+
+    private fun setupDarkModePreference() {
+        val sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this)
+        val isDarkMode = sharedPreferences.getBoolean("darkMode", false)
+
+        if (isDarkMode) {
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
+        } else {
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
+        }
     }
 
 }

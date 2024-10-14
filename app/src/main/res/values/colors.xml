@@ -2,7 +2,6 @@
 <resources>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
-
     <color name="snow">#FFFBF8</color>
     <color name="delftBlue">#505A79</color>
     <color name="delftBlueLight">#95505A79</color>
@@ -10,4 +9,10 @@
     <color name="moonstone">#6699A3</color>
     <color name="gray">#7A7A7A</color>
     <color name="brick">#C76763</color>
+
+    <color name="jet">#2E2E2E</color>
+    <color name="glaucous">#6979A9</color>
+    <color name="mattePumpkin">#E9AB79</color>
+    <color name="isabelline">#ECEAE8</color>
+
 </resources>

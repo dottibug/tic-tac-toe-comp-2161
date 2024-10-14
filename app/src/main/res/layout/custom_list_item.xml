@@ -28,6 +28,7 @@
             android:background="@android:color/transparent"
             android:fontFamily="@font/roboto_medium"
             android:text="@string/playerName"
+            android:textColor="?attr/colorAccent"
             android:textSize="18sp" />
 
         <TextView
@@ -38,6 +39,7 @@
             android:fontFamily="@font/roboto_medium"
             android:text="@string/total"
             android:textAlignment="center"
+            android:textColor="?attr/colorAccent"
             android:textSize="18sp" />
 
         <TextView
@@ -48,6 +50,7 @@
             android:fontFamily="@font/roboto_medium"
             android:text="@string/losses"
             android:textAlignment="center"
+            android:textColor="?attr/colorAccent"
             android:textSize="18sp" />
 
         <TextView
@@ -57,6 +60,7 @@
             android:fontFamily="@font/roboto_medium"
             android:text="@string/ties"
             android:textAlignment="center"
+            android:textColor="?attr/colorAccent"
             android:textSize="18sp" />
 
         <TextView
@@ -66,6 +70,7 @@
             android:fontFamily="@font/roboto_medium"
             android:text="@string/wins"
             android:textAlignment="center"
+            android:textColor="?attr/colorAccent"
             android:textSize="18sp" />
 
         <TextView
@@ -76,6 +81,7 @@
             android:fontFamily="@font/roboto_medium"
             android:text="@string/winPercentage"
             android:textAlignment="center"
+            android:textColor="?attr/colorAccent"
             android:textSize="18sp" />
 
         <TextView
@@ -85,6 +91,7 @@
             android:fontFamily="@font/roboto_medium"
             android:text="@string/lastPlayed"
             android:textAlignment="center"
+            android:textColor="?attr/colorAccent"
             android:textSize="18sp" />
     </LinearLayout>
 
