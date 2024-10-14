@@ -10,5 +10,9 @@
         <item name="colorError">@color/brick</item>
         <item name="colorTertiary">@color/isabelline</item>
         <item name="colorAccent">@color/isabelline</item>
+
+
+
+<!--        <item name="android:textColor">@color/isabelline</item>-->
     </style>
 </resources>

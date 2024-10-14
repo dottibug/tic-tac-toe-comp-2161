@@ -59,27 +59,31 @@
         android:id="@+id/buttonAddPlayer"
         style="@style/buttonPrimary"
         android:layout_height="64dp"
+        android:layout_marginEnd="24dp"
         android:backgroundTint="?attr/colorPrimary"
         android:text="@string/addPlayer"
         android:textColor="?attr/android:background"
         android:textSize="22sp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toBottomOf="@+id/buttonEnterNamesHome"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/buttonEnterNamesHome"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintHorizontal_chainStyle="packed"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextPlayerName"
-        app:layout_constraintVertical_bias="0.24" />
+        app:layout_constraintTop_toTopOf="@+id/buttonEnterNamesHome" />
 
     <Button
         android:id="@+id/buttonEnterNamesHome"
         style="@style/buttonSecondary"
         android:layout_height="64dp"
+        android:layout_marginStart="24dp"
         android:backgroundTint="?attr/colorSecondary"
         android:text="@string/buttonHome"
         android:textColor="?attr/android:background"
         android:textSize="22sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/buttonAddPlayer"
-        app:layout_constraintVertical_bias="0.12" />
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/buttonAddPlayer"
+        app:layout_constraintTop_toBottomOf="@+id/editTextPlayerName" />
 </androidx.constraintlayout.widget.ConstraintLayout>

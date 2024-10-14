@@ -2,10 +2,13 @@ package com.example.tictactoe
 
 import android.content.Intent
 import android.content.SharedPreferences
+import android.content.res.ColorStateList
 import android.os.Bundle
 import android.widget.TextView
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatDelegate
+import androidx.core.content.ContextCompat
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.preference.PreferenceManager
@@ -25,6 +28,8 @@ class PlayGameActivity : AppCompatActivity() {
     private lateinit var currentPlayer: String
     private lateinit var currentToken: String
     private lateinit var winningCells: List<Int>
+    private var gameEnded = false
+    private lateinit var defaultTextColorStateList: ColorStateList
 
     // NOTE: Testing purposes for now
     private val appUtils = AppUtils()
@@ -55,6 +60,9 @@ class PlayGameActivity : AppCompatActivity() {
 
         setupGame()
         setupCellListeners()
+
+        // Get the default text color state list of the board cells
+        defaultTextColorStateList = boardCells[0].textColors
 
         if (gameMode == "singlePlayer") {
             difficulty =
@@ -220,9 +228,12 @@ class PlayGameActivity : AppCompatActivity() {
         return false
     }
 
+    // Highlight the winning cells in the UI
     private fun highlightWinningCells() {
         for (cellIndex in winningCells) {
-            boardCells[cellIndex].setTextColor(resources.getColor(R.color.pumpkin, theme))
+            val isDarkMode = AppCompatDelegate.getDefaultNightMode() == AppCompatDelegate.MODE_NIGHT_YES
+            val colorId = if (isDarkMode) R.color.mattePumpkin else R.color.pumpkin
+            boardCells[cellIndex].setTextColor(ContextCompat.getColor(this, colorId))
         }
     }
 
@@ -248,21 +259,35 @@ class PlayGameActivity : AppCompatActivity() {
         // NOTE: the toast is temporary for testing purposes
         appUtils.showToast(this, message)
 
+        gameEnded = true
+        binding.buttonRestart.text = getString(R.string.buttonPlayAgain)
+        binding.buttonRestart.setOnClickListener { restartGame() }
+
         // Disable clicking on the board cells
         setBoardCellsEnabled(false)
+    }
 
+    private fun restartGame() {
+        gameEnded = false
+        binding.buttonRestart.text = getString(R.string.buttonRestart)
+        binding.buttonRestart.setOnClickListener { showRestartDialog() }
 
+        setupGame()
+        setupFirstPlayer()
+        updateBoardUI()
+        setBoardCellsEnabled(true)
 
-        // TODO Change restart button to a play again button; If pressed, make sure to change the button back to "restart"
-        // TODO Make sure to re-enable the board cells if the user presses "play again"
-        // TODO if "play again" clicked, make sure to reset the game board, current player, current token, and winnling lines
-
+        // Reset cell colors to the initial color
+        boardCells.forEach { cell ->
+            cell.setTextColor(defaultTextColorStateList)
+        }
     }
 
     // Show the restart dialog
-    // TODO if "restart" confirmed, make sure to reset the game board, current player, current token, and winnling lines
     private fun showRestartDialog() {
-        val restartDialog = RestartDialogFragment()
+        val restartDialog = RestartDialogFragment {
+            restartGame()
+        }
         restartDialog.show(supportFragmentManager, RestartDialogFragment.TAG)
     }
 
@@ -280,8 +305,7 @@ class PlayGameActivity : AppCompatActivity() {
 
 }
 
-// TODO: Restart game logic and the play again/restart button changes
 
-// TODO: Data persistance on screen rotation
+// TODO: Data persistance on screen rotation: Entering player name, player selection, and game board
 
 // TODO: Done. Refactor, test, submit.

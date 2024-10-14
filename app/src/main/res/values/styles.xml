@@ -75,6 +75,8 @@
         <item name="android:textAlignment">center</item>
         <item name="android:textSize">72sp</item>
         <item name="android:clickable">true</item>
+
+
     </style>
 
 </resources>

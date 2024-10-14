@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal">
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/textViewTic"
+                style="@style/gameTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="-12dp"
+                android:background="@android:color/transparent"
+                android:text="@string/tic"
+                android:textColor="?attr/colorSecondary" />
+
+            <TextView
+                android:id="@+id/textViewTac"
+                style="@style/gameTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="-50dp"
+                android:background="@android:color/transparent"
+                android:text="@string/tac"
+                android:textColor="?attr/colorPrimary" />
+
+            <TextView
+                android:id="@+id/textViewToe"
+                style="@style/gameTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="-50dp"
+                android:background="@android:color/transparent"
+                android:text="@string/toe"
+                android:textColor="?attr/colorSecondaryVariant" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_weight="1.25"
+            android:orientation="vertical">
+
+            <Button
+                android:id="@+id/buttonPlayerNames"
+                style="@style/buttonPrimary"
+                android:layout_width="300dp"
+                android:layout_height="64dp"
+                android:layout_gravity="center_horizontal"
+                android:backgroundTint="?attr/colorPrimary"
+                android:text="@string/addPlayer"
+                android:textColor="?attr/android:background"
+                android:textSize="22sp" />
+
+            <Button
+                android:id="@+id/buttonNewGame"
+                style="@style/buttonPrimary"
+                android:layout_height="64dp"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="12dp"
+                android:backgroundTint="?attr/colorPrimary"
+                android:text="@string/playGame"
+                android:textColor="?attr/android:background"
+                android:textSize="22sp" />
+
+            <Button
+                android:id="@+id/buttonStandings"
+                style="@style/buttonPrimary"
+                android:layout_height="64dp"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="12dp"
+                android:layout_marginBottom="12dp"
+                android:backgroundTint="?attr/colorPrimary"
+                android:text="@string/standings"
+                android:textColor="?attr/android:background"
+                android:textSize="22sp" />
+
+            <Button
+                android:id="@+id/buttonSettings"
+                style="@style/buttonPrimary"
+                android:layout_height="64dp"
+                android:layout_gravity="center_horizontal"
+                android:backgroundTint="?attr/colorPrimary"
+                android:text="@string/settings"
+                android:textColor="?attr/android:background"
+                android:textSize="22sp" />
+        </LinearLayout>
+
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

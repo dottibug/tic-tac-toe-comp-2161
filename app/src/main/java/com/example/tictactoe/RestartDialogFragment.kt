@@ -1,14 +1,13 @@
 package com.example.tictactoe
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.DialogFragment
 import com.example.tictactoe.databinding.FragmentRestartDialogBinding
 
-class RestartDialogFragment : DialogFragment() {
+class RestartDialogFragment(private val onRestartConfirmed: () -> Unit) : DialogFragment() {
     // Null until fragment is created (releases binding on destroy to save memory)
     private var binding: FragmentRestartDialogBinding? = null
 
@@ -22,8 +21,7 @@ class RestartDialogFragment : DialogFragment() {
         super.onViewCreated(view, savedInstanceState)
 
         binding?.buttonRestartGame?.setOnClickListener {
-            // TODO: Restart game logic here
-            Log.i("testcat", "Restart game button clicked; implement logic")
+            onRestartConfirmed()
             dismiss()
         }
 

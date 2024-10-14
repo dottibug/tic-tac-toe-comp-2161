@@ -10,6 +10,9 @@
         <item name="colorError">@color/brick</item>
         <item name="colorTertiary">@color/gray</item>
         <item name="colorAccent">@color/jet</item>
+
+
+<!--        <item name="android:textColor">@color/jet</item>-->
     </style>
 
     <style name="Theme.TicTacToe" parent="Base.Theme.TicTacToe" />

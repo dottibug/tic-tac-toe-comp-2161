@@ -52,4 +52,19 @@ class EnterNamesActivity : AppCompatActivity() {
             }
         }
     }
+
+    // ----------------------------
+    // DATA PERSISTENCE
+    // ----------------------------
+    // Save state of editTextPlayerName
+    override fun onSaveInstanceState(outState: Bundle) {
+        super.onSaveInstanceState(outState)
+        outState.putString("playerName", binding.editTextPlayerName.text.toString())
+    }
+
+    // Restore state of editTextPlayerName
+    override fun onRestoreInstanceState(savedInstanceState: Bundle) {
+        super.onRestoreInstanceState(savedInstanceState)
+        binding.editTextPlayerName.setText(savedInstanceState.getString("playerName", ""))
+    }
 }

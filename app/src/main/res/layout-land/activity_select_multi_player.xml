@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".SelectMultiPlayerActivity">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/textViewSelectMultiPlayer"
+                style="@style/heading"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="24dp"
+                android:layout_marginBottom="18dp"
+                android:text="@string/selectPlayers"
+                android:textColor="?attr/colorPrimary" />
+
+            <TextView
+                android:id="@+id/textViewPlayerOneLabel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="56dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="4dp"
+                android:fontFamily="@font/roboto_medium"
+                android:paddingStart="12dp"
+                android:text="@string/playerOne"
+                android:textAllCaps="true"
+                android:textSize="16sp" />
+
+            <Spinner
+                android:id="@+id/spinnerPlayerOneName"
+                style="@style/CustomSpinnerStyle"
+                android:layout_width="300dp"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginStart="56dp"
+                android:layout_marginEnd="55dp"
+                android:layout_marginBottom="18dp" />
+
+            <TextView
+                android:id="@+id/textViewPlayerTwoLabel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="56dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="4dp"
+                android:fontFamily="@font/roboto_medium"
+                android:text="@string/playerTwo"
+                android:textAllCaps="true"
+                android:textSize="16sp" />
+
+            <Spinner
+                android:id="@+id/spinnerPlayerTwoName"
+                style="@style/CustomSpinnerStyle"
+                android:layout_width="300dp"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginStart="56dp"
+                android:layout_marginTop="6dp"
+                android:layout_marginEnd="55dp" />
+
+            <Button
+                android:id="@+id/buttonPlayGameMultiplayer"
+                style="@style/buttonPrimary"
+                android:layout_height="64dp"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="32dp"
+                android:backgroundTint="?attr/colorPrimary"
+                android:text="@string/play"
+                android:textColor="?attr/android:background"
+                android:textSize="22sp" />
+
+            <Button
+                android:id="@+id/buttonAddNewMultiPlayer"
+                style="@style/buttonSecondary"
+                android:layout_height="64dp"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="18dp"
+                android:layout_marginBottom="18dp"
+                android:backgroundTint="?attr/colorPrimary"
+                android:text="@string/addNewPlayer"
+                android:textColor="?attr/android:background"
+                android:textSize="22sp" />
+
+            <Button
+                android:id="@+id/buttonMultiPlayerBackToSetup"
+                style="@style/buttonSecondary"
+                android:layout_height="64dp"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginBottom="32dp"
+                android:backgroundTint="?attr/colorSecondary"
+                android:text="@string/buttonGameSetup"
+                android:textColor="?attr/android:background"
+                android:textSize="22sp" />
+        </LinearLayout>
+    </ScrollView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,0 +1,271 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="?attr/android:background"
+    tools:context=".PlayGameActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal">
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_gravity="top"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:paddingStart="18dp"
+            android:paddingEnd="18dp">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="12dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/textViewPlayGameTic"
+                    style="@style/gameTitle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/tic"
+                    android:textColor="?attr/colorSecondary"
+                    android:textSize="54sp" />
+
+                <TextView
+                    android:id="@+id/textViewPlayGameTac"
+                    style="@style/gameTitle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginEnd="8dp"
+                    android:background="@android:color/transparent"
+                    android:text="@string/tac"
+                    android:textColor="?attr/colorPrimary"
+                    android:textSize="54sp" />
+
+                <TextView
+                    android:id="@+id/textViewPlayGameToe"
+                    style="@style/gameTitle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@android:color/transparent"
+                    android:text="@string/toe"
+                    android:textColor="?attr/colorSecondaryVariant"
+                    android:textSize="54sp" />
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/textViewPlayerTurn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="18dp"
+                android:layout_marginBottom="18dp"
+                android:fontFamily="@font/roboto_medium"
+                android:gravity="center"
+                android:paddingStart="24dp"
+                android:paddingEnd="24dp"
+                android:text="Player One's Turn"
+                android:textColor="?attr/colorAccent"
+                android:textSize="24sp" />
+
+            <Button
+                android:id="@+id/buttonGameGoToMainMenu"
+                style="@style/buttonPrimary"
+                android:layout_height="54dp"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="18dp"
+                android:layout_marginBottom="18dp"
+                android:backgroundTint="?attr/colorPrimary"
+                android:text="@string/buttonHome"
+                android:textColor="?attr/android:background"
+                android:textSize="18sp" />
+
+            <Button
+                android:id="@+id/buttonRestart"
+                style="@style/buttonPrimary"
+                android:layout_height="54dp"
+                android:layout_gravity="center_horizontal"
+                android:backgroundTint="?attr/colorPrimary"
+                android:text="@string/buttonRestart"
+                android:textColor="?attr/android:background"
+                android:textSize="18sp" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/linearLayoutBoard"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:padding="20dp">
+
+            <LinearLayout
+                android:id="@+id/row1"
+                style="@style/gameBoardRow"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/textViewCell00"
+                    style="@style/boardCell"
+                    android:hint="•" />
+
+                <View
+                    android:id="@+id/colDivider1"
+                    style="@style/verticalLine"
+                    android:layout_height="match_parent"
+                    android:layout_weight="0"
+                    android:background="?attr/colorPrimary" />
+
+                <TextView
+                    android:id="@+id/textViewCell01"
+                    style="@style/boardCell"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:hint="•" />
+
+                <View
+                    android:id="@+id/colDivider2"
+                    style="@style/verticalLine"
+                    android:layout_height="match_parent"
+                    android:layout_weight="0"
+                    android:background="?attr/colorPrimary" />
+
+                <TextView
+                    android:id="@+id/textViewCell02"
+                    style="@style/boardCell"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:hint="•" />
+
+            </LinearLayout>
+
+            <View
+                android:id="@+id/rowDivider1"
+                style="@style/horizontalLine"
+                android:layout_width="match_parent"
+                android:layout_weight="0"
+                android:background="?attr/colorPrimary" />
+
+            <LinearLayout
+                android:id="@+id/row2"
+                style="@style/gameBoardRow"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/textViewCell10"
+                    style="@style/boardCell"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:hint="•" />
+
+                <View
+                    android:id="@+id/colDivider3"
+                    style="@style/verticalLine"
+                    android:layout_height="match_parent"
+                    android:layout_weight="0"
+                    android:background="?attr/colorPrimary" />
+
+                <TextView
+                    android:id="@+id/textViewCell11"
+                    style="@style/boardCell"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:hint="•" />
+
+                <View
+                    android:id="@+id/colDivider4"
+                    style="@style/verticalLine"
+                    android:layout_height="match_parent"
+                    android:layout_weight="0"
+                    android:background="?attr/colorPrimary" />
+
+                <TextView
+                    android:id="@+id/textViewCell12"
+                    style="@style/boardCell"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:hint="•" />
+
+            </LinearLayout>
+
+            <View
+                android:id="@+id/rowDivider2"
+                style="@style/horizontalLine"
+                android:layout_width="match_parent"
+                android:layout_weight="0"
+                android:background="?attr/colorPrimary" />
+
+            <LinearLayout
+                android:id="@+id/row3"
+                style="@style/gameBoardRow"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/textViewCell20"
+                    style="@style/boardCell"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:hint="•" />
+
+                <View
+                    android:id="@+id/colDivider5"
+                    style="@style/verticalLine"
+                    android:layout_height="match_parent"
+                    android:layout_weight="0"
+                    android:background="?attr/colorPrimary" />
+
+                <TextView
+                    android:id="@+id/textViewCell21"
+                    style="@style/boardCell"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:hint="•" />
+
+                <View
+                    android:id="@+id/colDivider6"
+                    style="@style/verticalLine"
+                    android:layout_height="match_parent"
+                    android:layout_weight="0"
+                    android:background="?attr/colorPrimary" />
+
+                <TextView
+                    android:id="@+id/textViewCell22"
+                    style="@style/boardCell"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:hint="•" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
