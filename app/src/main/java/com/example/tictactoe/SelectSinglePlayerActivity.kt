@@ -15,6 +15,7 @@ class SelectSinglePlayerActivity : AppCompatActivity() {
     private lateinit var binding: ActivitySelectSinglePlayerBinding
     private val playerManager = PlayerManager()
     private val appUtils = AppUtils()
+    private var savedSpinnerPosition: Int = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -29,10 +30,16 @@ class SelectSinglePlayerActivity : AppCompatActivity() {
             insets
         }
 
+        // Restore state of spinner selection, if applicable
+        if (savedInstanceState != null) {
+            savedSpinnerPosition = savedInstanceState.getInt("spinnerSelection", 0)
+        }
+
         // Asynchronously get the list of players from the local game data file
         playerManager.asyncGetPlayers(this) { players ->
             populateMenu(players)
             setupSpinnerListener()
+            binding.spinnerSinglePlayerName.setSelection(savedSpinnerPosition)
         }
 
         binding.buttonPlayGameSingle.setOnClickListener { handlePlayGameVsAndroid() }
@@ -64,6 +71,7 @@ class SelectSinglePlayerActivity : AppCompatActivity() {
             override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
                 val selectedPlayer = parent?.getItemAtPosition(position) as String
                 saveSelectedPlayer(selectedPlayer)
+                savedSpinnerPosition = position
             }
 
             override fun onNothingSelected(parent: AdapterView<*>?) {
@@ -130,5 +138,14 @@ class SelectSinglePlayerActivity : AppCompatActivity() {
             // Clear the lastAddedPlayer from preferences
             sharedPreferences.edit().remove("lastAddedPlayer").apply()
         }
+    }
+
+    // ----------------------------
+    // DATA PERSISTENCE
+    // ----------------------------
+    // Save state of spinner selection
+    override fun onSaveInstanceState(outState: Bundle) {
+        super.onSaveInstanceState(outState)
+        outState.putInt("spinnerSelection", savedSpinnerPosition)
     }
 }

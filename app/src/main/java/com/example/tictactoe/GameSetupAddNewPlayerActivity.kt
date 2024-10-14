@@ -56,4 +56,19 @@ class GameSetupAddNewPlayerActivity : AppCompatActivity() {
             }
         }
     }
+
+    // ----------------------------
+    // DATA PERSISTENCE
+    // ----------------------------
+    // Save state of editTextPlayerName
+    override fun onSaveInstanceState(outState: Bundle) {
+        super.onSaveInstanceState(outState)
+        outState.putString("playerName", binding.editTextAddPlayerName.text.toString())
+    }
+
+    // Restore state of editTextPlayerName
+    override fun onRestoreInstanceState(savedInstanceState: Bundle) {
+        super.onRestoreInstanceState(savedInstanceState)
+        binding.editTextAddPlayerName.setText(savedInstanceState.getString("playerName", ""))
+    }
 }

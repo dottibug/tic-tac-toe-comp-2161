@@ -66,5 +66,4 @@ class StandingsActivity : AppCompatActivity() {
     private fun refreshStandings() {
         playerManager.asyncGetPlayers(this) { players -> populateListView(players) }
     }
-
 }

@@ -18,6 +18,8 @@ class SelectMultiPlayerActivity : AppCompatActivity() {
     private val appUtils = AppUtils()
     private lateinit var spinnerPlayerOne: Spinner
     private lateinit var spinnerPlayerTwo: Spinner
+    private var savedPlayerOneSpinnerPosition: Int = 0
+    private var savedPlayerTwoSpinnerPosition: Int = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -35,11 +37,20 @@ class SelectMultiPlayerActivity : AppCompatActivity() {
         spinnerPlayerOne = binding.spinnerPlayerOneName
         spinnerPlayerTwo = binding.spinnerPlayerTwoName
 
+        // Restore state of spinner selections, if applicable
+        if (savedInstanceState != null) {
+            savedPlayerOneSpinnerPosition = savedInstanceState.getInt("playerOneSpinnerSelection", 0)
+            savedPlayerTwoSpinnerPosition = savedInstanceState.getInt("playerTwoSpinnerSelection", 0)
+        }
+
         // Asynchronously get the list of players from the local game data file
         playerManager.asyncGetPlayers(this) { players ->
             populateMenus(players)
             setupSpinnerListener(spinnerPlayerOne, "PlayerOne")
             setupSpinnerListener(spinnerPlayerTwo, "PlayerTwo")
+            // Set the selections after populating the spinners
+            spinnerPlayerOne.setSelection(savedPlayerOneSpinnerPosition)
+            spinnerPlayerTwo.setSelection(savedPlayerTwoSpinnerPosition)
         }
 
         binding.buttonMultiPlayerBackToSetup.setOnClickListener { finish() }
@@ -73,6 +84,12 @@ class SelectMultiPlayerActivity : AppCompatActivity() {
             override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
                 val selectedPlayer = parent?.getItemAtPosition(position) as String
                 saveSelectedPlayer(selectedPlayer, playerNumber)
+
+                if (playerNumber == "PlayerOne") {
+                    savedPlayerOneSpinnerPosition = position
+                } else {
+                    savedPlayerTwoSpinnerPosition = position
+                }
             }
 
             override fun onNothingSelected(parent: AdapterView<*>?) {
@@ -134,5 +151,15 @@ class SelectMultiPlayerActivity : AppCompatActivity() {
             setupSpinnerListener(spinnerPlayerOne, "PlayerOne")
             setupSpinnerListener(spinnerPlayerTwo, "PlayerTwo")
         }
+    }
+
+    // ----------------------------
+    // DATA PERSISTENCE
+    // ----------------------------
+    // Save state of spinner selection
+    override fun onSaveInstanceState(outState: Bundle) {
+        super.onSaveInstanceState(outState)
+        outState.putInt("playerOneSpinnerSelection", savedPlayerOneSpinnerPosition)
+        outState.putInt("playerTwoSpinnerSelection", savedPlayerTwoSpinnerPosition)
     }
 }

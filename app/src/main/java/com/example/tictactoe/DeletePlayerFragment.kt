@@ -14,7 +14,8 @@ class DeletePlayerFragment : DialogFragment() {
     private var binding: FragmentDeletePlayerBinding? = null
     private val playerManager = PlayerManager()
     private val appUtils = AppUtils()
-    private lateinit var playerToDelete : String
+    private var playerToDelete : String = ""
+    private var savedSpinnerPosition: Int = 0
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?): View? {
@@ -25,10 +26,24 @@ class DeletePlayerFragment : DialogFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        if (savedInstanceState != null) {
+            playerToDelete = savedInstanceState.getString("playerToDelete", "")
+            savedSpinnerPosition = savedInstanceState.getInt("spinnerPosition", 0)
+        }
+
         // Asynchronously get the list of players from the local game data file
         playerManager.asyncGetPlayers(requireContext()) { players ->
             populateMenu(players)
             setupSpinnerListener()
+            // Restore the spinner position after populating
+            if (playerToDelete.isNotEmpty()) {
+                val position = (binding?.spinnerDeletePlayer?.adapter as? ArrayAdapter<String>)?.getPosition(playerToDelete) ?: -1
+                if (position != -1) {
+                    binding?.spinnerDeletePlayer?.setSelection(position)
+                }
+            } else {
+                binding?.spinnerDeletePlayer?.setSelection(savedSpinnerPosition)
+            }
         }
 
        binding?.buttonDeleteThisPlayer?.setOnClickListener { handleDeletePlayer() }
@@ -56,6 +71,7 @@ class DeletePlayerFragment : DialogFragment() {
             override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
                 val selectedPlayer = parent?.getItemAtPosition(position) as String
                 playerToDelete = selectedPlayer
+                savedSpinnerPosition = position
             }
 
             override fun onNothingSelected(parent: AdapterView<*>?) {
@@ -86,5 +102,15 @@ class DeletePlayerFragment : DialogFragment() {
 
     companion object {
         const val TAG = "DeletePlayerDialog"
+    }
+
+    // ----------------------------
+    // DATA PERSISTENCE
+    // ----------------------------
+    // Save state of playerToDelete
+    override fun onSaveInstanceState(outState: Bundle) {
+        super.onSaveInstanceState(outState)
+        outState.putString("playerToDelete", playerToDelete)
+        outState.putInt("spinnerPosition", savedSpinnerPosition)
     }
 }
