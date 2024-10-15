@@ -3,6 +3,7 @@ package com.example.tictactoe
 import android.content.Context
 import android.widget.Toast
 
+// Utility class for showing toast messages
 class AppUtils () {
     var toast: Toast? = null
 

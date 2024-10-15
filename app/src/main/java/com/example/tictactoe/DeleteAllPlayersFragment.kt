@@ -9,6 +9,7 @@ import com.example.tictactoe.databinding.FragmentDeleteAllPlayersBinding
 
 // Fragment for deleting a player from the local game data file
 class DeleteAllPlayersFragment : DialogFragment() {
+
     private var binding: FragmentDeleteAllPlayersBinding? = null
     private val playerManager = PlayerManager()
     private val appUtils = AppUtils()
@@ -38,11 +39,13 @@ class DeleteAllPlayersFragment : DialogFragment() {
         binding?.root?.postDelayed({ dismiss() }, 1000)
     }
 
+    // Clean up binding when the view is destroyed to avoid memory leaks
     override fun onDestroyView() {
         super.onDestroyView()
         binding = null
     }
 
+    // Tag for the fragment
     companion object {
         const val TAG = "DeleteAllPlayersDialog"
     }

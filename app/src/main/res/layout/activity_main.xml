@@ -52,54 +52,56 @@
         app:layout_constraintVertical_bias="0.0" />
 
     <Button
-        android:id="@+id/buttonPlayerNames"
-        style="@style/buttonPrimary"
-        android:layout_width="300dp"
-        android:layout_height="64dp"
-        android:backgroundTint="?attr/colorPrimary"
-        android:text="@string/addPlayer"
-        android:textColor="?attr/android:background"
-        android:textSize="22sp"
-        app:layout_constraintBottom_toTopOf="@+id/buttonNewGame"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textViewToe"
-        app:layout_constraintVertical_bias="0.18"
-        app:layout_constraintVertical_chainStyle="packed" />
-
-    <Button
         android:id="@+id/buttonNewGame"
         style="@style/buttonPrimary"
         android:layout_height="64dp"
-        android:layout_marginTop="12dp"
+        android:layout_marginTop="24dp"
         android:backgroundTint="?attr/colorPrimary"
         android:text="@string/playGame"
         android:textColor="?attr/android:background"
         android:textSize="22sp"
-        app:layout_constraintBottom_toTopOf="@+id/buttonStandings"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/buttonPlayerNames" />
+        app:layout_constraintTop_toBottomOf="@+id/textViewToe"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <Button
+        android:id="@+id/buttonPlayerNames"
+        style="@style/buttonPrimary"
+        android:layout_width="300dp"
+        android:layout_height="64dp"
+        android:layout_marginTop="18dp"
+        android:backgroundTint="?attr/colorPrimary"
+        android:text="@string/addPlayer"
+        android:textColor="?attr/android:background"
+        android:textSize="22sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/buttonNewGame"
+        app:layout_constraintVertical_bias="0.0" />
 
     <Button
         android:id="@+id/buttonStandings"
         style="@style/buttonPrimary"
         android:layout_height="64dp"
-        android:layout_marginTop="12dp"
-        android:layout_marginBottom="12dp"
+        android:layout_marginTop="18dp"
         android:backgroundTint="?attr/colorPrimary"
         android:text="@string/standings"
         android:textColor="?attr/android:background"
         android:textSize="22sp"
-        app:layout_constraintBottom_toTopOf="@+id/buttonSettings"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/buttonNewGame" />
+        app:layout_constraintTop_toBottomOf="@+id/buttonPlayerNames"
+        app:layout_constraintVertical_bias="0.0" />
 
     <Button
         android:id="@+id/buttonSettings"
         style="@style/buttonPrimary"
         android:layout_height="64dp"
+        android:layout_marginTop="18dp"
         android:backgroundTint="?attr/colorPrimary"
         android:text="@string/settings"
         android:textColor="?attr/android:background"
@@ -107,6 +109,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/buttonStandings" />
+        app:layout_constraintTop_toBottomOf="@+id/buttonStandings"
+        app:layout_constraintVertical_bias="0.0" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

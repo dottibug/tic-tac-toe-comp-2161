@@ -1,13 +1,13 @@
 package com.example.tictactoe
 
 import android.os.Bundle
-import android.util.Log
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.preference.ListPreference
 import androidx.preference.PreferenceFragmentCompat
 import androidx.preference.PreferenceManager
 import androidx.preference.SwitchPreferenceCompat
 
+// Settings fragment for the root preferences. Users can set dark mode and difficulty vs Android
 class SettingsFragment : PreferenceFragmentCompat() {
 
     override fun onCreatePreferences(savedInstanceState: Bundle?, rootKey: String?) {
@@ -16,6 +16,7 @@ class SettingsFragment : PreferenceFragmentCompat() {
         setupDifficultyPreference()
     }
 
+    // Set up the dark mode preference switch
     private fun setupDarkModePreference() {
         val darkModePreference = findPreference<SwitchPreferenceCompat>("darkMode")
 
@@ -41,18 +42,14 @@ class SettingsFragment : PreferenceFragmentCompat() {
         }
     }
 
+    // Set up the difficulty preference list
     private fun setupDifficultyPreference() {
         val difficultyPreference = findPreference<ListPreference>("difficulty")
 
         difficultyPreference?.setOnPreferenceChangeListener { _, newValue ->
-            Log.i("testcat", "difficulty changed to $newValue")
             val sharedPreferences = PreferenceManager.getDefaultSharedPreferences(requireContext())
             sharedPreferences.edit().putString("difficulty", newValue as String).apply()
             true
         }
-
-        Log.i("testcat", "Current difficulty: ${difficultyPreference?.value}")
     }
 }
-
-// TODO: Settings: Difficulty vs Android, dark mode, delete player, reset scores, clear all player data

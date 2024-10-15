@@ -24,59 +24,61 @@
         android:id="@+id/spinnerSinglePlayerName"
         style="@style/CustomSpinnerStyle"
         android:layout_width="300dp"
+        android:layout_marginTop="18dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textViewSelectSinglePlayer"
-        app:layout_constraintVertical_bias="0.06" />
+        app:layout_constraintVertical_bias="0.0" />
+
+    <Button
+        android:id="@+id/buttonPlayGameSingle"
+        style="@style/buttonPrimary"
+        android:layout_height="64dp"
+        android:layout_marginTop="32dp"
+        android:backgroundTint="?attr/colorPrimary"
+        android:text="@string/play"
+        android:textColor="?attr/android:background"
+        android:textSize="22sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.549"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/spinnerSinglePlayerName"
+        app:layout_constraintVertical_bias="0.0" />
 
     <Button
         android:id="@+id/buttonAddNewSinglePlayer"
         style="@style/buttonSecondary"
         android:layout_height="64dp"
         android:layout_marginTop="18dp"
-        android:layout_marginBottom="18dp"
         android:backgroundTint="?attr/colorPrimary"
         android:text="@string/addNewPlayer"
         android:textColor="?attr/android:background"
         android:textSize="22sp"
-        app:layout_constraintBottom_toTopOf="@+id/buttonSinglePlayerBackToSetup"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintHorizontal_bias="0.468"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/buttonPlayGameSingle"
-        app:layout_constraintVertical_bias="0.12" />
-
-    <Button
-        android:id="@+id/buttonPlayGameSingle"
-        style="@style/buttonPrimary"
-        android:layout_height="64dp"
-        android:backgroundTint="?attr/colorPrimary"
-        android:text="@string/play"
-        android:textColor="?attr/android:background"
-        android:textSize="22sp"
-        app:layout_constraintBottom_toTopOf="@+id/buttonAddNewSinglePlayer"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/spinnerSinglePlayerName"
-        app:layout_constraintVertical_bias="0.24"
-        app:layout_constraintVertical_chainStyle="packed" />
+        app:layout_constraintVertical_bias="0.0" />
 
     <Button
         android:id="@+id/buttonSinglePlayerBackToSetup"
         style="@style/buttonSecondary"
         android:layout_height="64dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="18dp"
+        android:layout_marginBottom="64dp"
         android:backgroundTint="?attr/colorSecondary"
         android:text="@string/buttonGameSetup"
         android:textColor="?attr/android:background"
         android:textSize="22sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintHorizontal_bias="0.504"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/buttonAddNewSinglePlayer" />
+        app:layout_constraintTop_toBottomOf="@+id/buttonAddNewSinglePlayer"
+        app:layout_constraintVertical_bias="0.0" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

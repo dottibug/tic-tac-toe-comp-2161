@@ -47,8 +47,6 @@ class GameSetupAddNewPlayerActivity : AppCompatActivity() {
                     editor.putString("lastAddedPlayer", playerName)
                     editor.putBoolean("newPlayerAdded", true)
                     editor.apply()
-
-                    finish()
                 }
 
                 // Player already exists: toast message
@@ -69,6 +67,8 @@ class GameSetupAddNewPlayerActivity : AppCompatActivity() {
     // Restore state of editTextPlayerName
     override fun onRestoreInstanceState(savedInstanceState: Bundle) {
         super.onRestoreInstanceState(savedInstanceState)
-        binding.editTextAddPlayerName.setText(savedInstanceState.getString("playerName", ""))
+        val playerName = savedInstanceState.getString("playerName", "")
+        binding.editTextAddPlayerName.setText(playerName)
+        binding.editTextAddPlayerName.setSelection(playerName.length)
     }
 }

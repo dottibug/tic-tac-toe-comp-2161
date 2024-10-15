@@ -11,6 +11,7 @@ import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import com.example.tictactoe.databinding.ActivitySelectSinglePlayerBinding
 
+// Activity for selecting a single player for single player game play.
 class SelectSinglePlayerActivity : AppCompatActivity() {
     private lateinit var binding: ActivitySelectSinglePlayerBinding
     private val playerManager = PlayerManager()
@@ -66,6 +67,7 @@ class SelectSinglePlayerActivity : AppCompatActivity() {
         binding.spinnerSinglePlayerName.adapter = adapter
     }
 
+    // Set up the listener for the spinner
     private fun setupSpinnerListener() {
         binding.spinnerSinglePlayerName.onItemSelectedListener = object: AdapterView.OnItemSelectedListener {
             override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
@@ -80,6 +82,7 @@ class SelectSinglePlayerActivity : AppCompatActivity() {
         }
     }
 
+    // Save the selected player to shared preferences (NOTE: not the root preferences from settings)
     private fun saveSelectedPlayer(selectedPlayer: String) {
         val sharedPreferences = getSharedPreferences("GamePrefs", MODE_PRIVATE)
         val editor = sharedPreferences.edit()
@@ -87,6 +90,7 @@ class SelectSinglePlayerActivity : AppCompatActivity() {
         editor.apply()
     }
 
+    // Handle the click event for the "Play Game" button
     private fun handlePlayGameVsAndroid() {
         // Start game play activity
         val sharedPreferences = getSharedPreferences("GamePrefs", MODE_PRIVATE)
@@ -98,6 +102,7 @@ class SelectSinglePlayerActivity : AppCompatActivity() {
         startActivity(intent)
     }
 
+    // Handle the click event for the "Add New Player" button
     private fun handleAddNewPlayer() {
         val intent = Intent(this, GameSetupAddNewPlayerActivity::class.java)
         startActivity(intent)

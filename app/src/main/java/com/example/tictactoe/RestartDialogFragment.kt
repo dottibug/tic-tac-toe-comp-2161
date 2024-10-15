@@ -7,6 +7,8 @@ import android.view.ViewGroup
 import androidx.fragment.app.DialogFragment
 import com.example.tictactoe.databinding.FragmentRestartDialogBinding
 
+// Dialog fragment for restarting the game. Asks user to confirm restarting the game
+// (and lose all current progress) or continue with the current game.
 class RestartDialogFragment(private val onRestartConfirmed: () -> Unit) : DialogFragment() {
     // Null until fragment is created (releases binding on destroy to save memory)
     private var binding: FragmentRestartDialogBinding? = null

@@ -8,60 +8,53 @@
     android:layout_gravity="center"
     tools:context=".GameSetupActivity">
 
-    <TextView
-        android:id="@+id/textViewGameSetup"
-        style="@style/heading"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="72dp"
-        android:layout_marginEnd="73dp"
-        android:text="@string/gameSetup"
-        android:textColor="?attr/colorPrimary"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.12" />
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
-    <Button
-        android:id="@+id/buttonGameVsAndroid"
-        style="@style/buttonPrimary"
-        android:backgroundTint="?attr/colorPrimary"
-        android:text="@string/gameVsAndroid"
-        android:textColor="?attr/android:background"
-        app:layout_constraintBottom_toTopOf="@+id/buttonGameVsPlayer"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textViewGameSetup"
-        app:layout_constraintVertical_bias="0.24"
-        app:layout_constraintVertical_chainStyle="packed" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" >
 
-    <Button
-        android:id="@+id/buttonGameVsPlayer"
-        style="@style/buttonPrimary"
-        android:layout_marginTop="18dp"
-        android:layout_marginBottom="18dp"
-        android:backgroundTint="?attr/colorPrimary"
-        android:text="@string/gameVsPlayer"
-        android:textColor="?attr/android:background"
-        app:layout_constraintBottom_toTopOf="@+id/buttonGameSetupHome"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/buttonGameVsAndroid"
-        app:layout_constraintVertical_bias="0.0" />
+            <TextView
+                android:id="@+id/textViewGameSetup"
+                style="@style/heading"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="24dp"
+                android:text="@string/gameSetup"
+                android:textColor="?attr/colorPrimary" />
 
-    <Button
-        android:id="@+id/buttonGameSetupHome"
-        style="@style/buttonSecondary"
-        android:backgroundTint="?attr/colorSecondary"
-        android:text="@string/buttonHome"
-        android:textColor="?attr/android:background"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/buttonGameVsPlayer"
-        app:layout_constraintVertical_bias="0.0" />
+            <Button
+                android:id="@+id/buttonGameVsAndroid"
+                style="@style/buttonPrimary"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="32dp"
+                android:backgroundTint="?attr/colorPrimary"
+                android:text="@string/gameVsAndroid"
+                android:textColor="?attr/android:background" />
+
+            <Button
+                android:id="@+id/buttonGameVsPlayer"
+                style="@style/buttonPrimary"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="18dp"
+                android:backgroundTint="?attr/colorPrimary"
+                android:text="@string/gameVsPlayer"
+                android:textColor="?attr/android:background" />
+
+            <Button
+                android:id="@+id/buttonGameSetupHome"
+                style="@style/buttonSecondary"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="18dp"
+                android:layout_marginBottom="24dp"
+                android:backgroundTint="?attr/colorSecondary"
+                android:text="@string/buttonHome"
+                android:textColor="?attr/android:background" />
+        </LinearLayout>
+    </ScrollView>
+
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -23,8 +23,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
-                android:layout_marginTop="24dp"
-                android:layout_marginBottom="18dp"
+                android:layout_marginTop="18dp"
                 android:text="@string/selectPlayer"
                 android:textColor="?attr/colorPrimary" />
 
@@ -32,27 +31,28 @@
                 android:id="@+id/spinnerSinglePlayerName"
                 style="@style/CustomSpinnerStyle"
                 android:layout_width="300dp"
-                android:layout_gravity="center_horizontal" />
-
-            <Button
-                android:id="@+id/buttonAddNewSinglePlayer"
-                style="@style/buttonSecondary"
-                android:layout_height="64dp"
                 android:layout_gravity="center_horizontal"
-                android:layout_marginTop="24dp"
-                android:layout_marginBottom="18dp"
-                android:backgroundTint="?attr/colorPrimary"
-                android:text="@string/addNewPlayer"
-                android:textColor="?attr/android:background"
-                android:textSize="22sp" />
+                android:layout_marginTop="18dp" />
 
             <Button
                 android:id="@+id/buttonPlayGameSingle"
                 style="@style/buttonPrimary"
                 android:layout_height="64dp"
                 android:layout_gravity="center_horizontal"
+                android:layout_marginTop="32dp"
                 android:backgroundTint="?attr/colorPrimary"
                 android:text="@string/play"
+                android:textColor="?attr/android:background"
+                android:textSize="22sp" />
+
+            <Button
+                android:id="@+id/buttonAddNewSinglePlayer"
+                style="@style/buttonSecondary"
+                android:layout_height="64dp"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="18dp"
+                android:backgroundTint="?attr/colorPrimary"
+                android:text="@string/addNewPlayer"
                 android:textColor="?attr/android:background"
                 android:textSize="22sp" />
 
@@ -61,7 +61,8 @@
                 style="@style/buttonSecondary"
                 android:layout_height="64dp"
                 android:layout_gravity="center_horizontal"
-                android:layout_marginTop="8dp"
+                android:layout_marginTop="18dp"
+                android:layout_marginBottom="32dp"
                 android:backgroundTint="?attr/colorSecondary"
                 android:text="@string/buttonGameSetup"
                 android:textColor="?attr/android:background"

@@ -11,6 +11,7 @@ import com.example.tictactoe.databinding.FragmentDeletePlayerBinding
 
 // Fragment for deleting a player from the local game data file
 class DeletePlayerFragment : DialogFragment() {
+
     private var binding: FragmentDeletePlayerBinding? = null
     private val playerManager = PlayerManager()
     private val appUtils = AppUtils()
@@ -35,7 +36,8 @@ class DeletePlayerFragment : DialogFragment() {
         playerManager.asyncGetPlayers(requireContext()) { players ->
             populateMenu(players)
             setupSpinnerListener()
-            // Restore the spinner position after populating
+
+            // Restore the spinner position after populating players
             if (playerToDelete.isNotEmpty()) {
                 val position = (binding?.spinnerDeletePlayer?.adapter as? ArrayAdapter<String>)?.getPosition(playerToDelete) ?: -1
                 if (position != -1) {
@@ -82,7 +84,6 @@ class DeletePlayerFragment : DialogFragment() {
 
     // Delete the selected player from the local game data file
     private fun handleDeletePlayer() {
-        // Delete the selected player from the local game data file
         playerManager.asyncDeletePlayer(requireContext(), playerToDelete) { success ->
             if (success) {
                 appUtils.showToast(requireContext(), "$playerToDelete has been deleted")

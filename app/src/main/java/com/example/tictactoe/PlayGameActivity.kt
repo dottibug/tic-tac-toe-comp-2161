@@ -14,10 +14,13 @@ import androidx.core.view.WindowInsetsCompat
 import androidx.preference.PreferenceManager
 import com.example.tictactoe.databinding.ActivityPlayGameBinding
 
+// Activity for playing the game. Handles single player vs Android and multi player modes.
+// Single player mode is implemented using the AsyncAndroidTurn class (background task).
 class PlayGameActivity : AppCompatActivity() {
     private lateinit var binding: ActivityPlayGameBinding
     private lateinit var gameSettings: SharedPreferences
     private val playerManager = PlayerManager()
+    private val appUtils = AppUtils()
     private var androidTurnTask: AsyncAndroidTurn? = null
     private lateinit var gameBoard: Array<Array<String>> // 3x3 game board represented as a 2D array of strings
     private lateinit var defaultTextColorStateList: ColorStateList
@@ -30,9 +33,6 @@ class PlayGameActivity : AppCompatActivity() {
     private lateinit var currentToken: String
     private var winningCells: List<Int> = emptyList()
     private var gameEnded = false
-
-    // NOTE: Testing purposes for now
-    private val appUtils = AppUtils()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -47,11 +47,13 @@ class PlayGameActivity : AppCompatActivity() {
             insets
         }
 
+        // Initialize game setup shared preferences (NOTE: not the root preferences from settings)
         gameSettings = getSharedPreferences("GamePrefs", MODE_PRIVATE)
 
         binding.buttonGameGoToMainMenu.setOnClickListener { navigateToHome() }
         binding.buttonRestart.setOnClickListener { showRestartDialog() }
 
+        // Initialize the board cells
         boardCells = arrayOf(
             binding.textViewCell00, binding.textViewCell01, binding.textViewCell02,
             binding.textViewCell10, binding.textViewCell11, binding.textViewCell12,
@@ -61,15 +63,14 @@ class PlayGameActivity : AppCompatActivity() {
         // Get the default text color state list of the board cells
         defaultTextColorStateList = boardCells[0].textColors
 
-        if (savedInstanceState == null) {
-            setupGame()
-        } else {
-            restoreGameState(savedInstanceState)
-        }
+        // Restore or setup the game state
+        if (savedInstanceState == null) { setupGame() }
+        else { restoreGameState(savedInstanceState) }
 
-//        setupGame()
+        // Set up button click listeners for each cell
         setupCellListeners()
 
+        // Set difficulty based on root settings preference
         if (gameMode == "singlePlayer") {
             difficulty =
                 PreferenceManager.getDefaultSharedPreferences(this).getString("difficulty", "Easy").toString()
@@ -96,7 +97,7 @@ class PlayGameActivity : AppCompatActivity() {
 
         updateBoardUI()
 
-        // If the game has ended, restore the highlighted winning cells and other win conditions
+        // If the game has ended, restore the highlighted winning cells and other game end states
         if (gameEnded) {
             binding.buttonRestart.text = getString(R.string.buttonPlayAgain)
             binding.buttonRestart.setOnClickListener { restartGame() }
@@ -122,10 +123,8 @@ class PlayGameActivity : AppCompatActivity() {
         winningCells = emptyList()
     }
 
-    // Set game mode
-    private fun setGameMode() {
-        gameMode = gameSettings.getString("gameMode", "").toString()
-    }
+    // Get game mode from shared preferences (single player or multi player)
+    private fun setGameMode() { gameMode = gameSettings.getString("gameMode", "").toString() }
 
     // Set player one and two for taking turns
     private fun setPlayers() {
@@ -174,17 +173,19 @@ class PlayGameActivity : AppCompatActivity() {
         }
     }
 
+    // Place a marker on the game board
     private fun placeMarker(row: Int, col: Int) {
         // Update game board array with the appropriate token and update the UI
         gameBoard[row][col] = currentToken
         updateBoardUI()
 
-        // Check for a win or draw
+        // Check for a win
         if (gameWon()) {
             highlightWinningCells()
             endGame("$currentPlayer won!")
         }
 
+        // Check for a draw
         else if (gameDraw()) { endGame("It's a draw!") }
 
         // Change current token and current player; initiate Android turn if single player mode
@@ -232,8 +233,8 @@ class PlayGameActivity : AppCompatActivity() {
     // | [ 10, 11, 12 ], |
     // | [ 20, 21, 22 ]  |
 
-    // Check if the game is won
-    // Sets the indices of the winning cells (0 to 8, to align with the boardCells array of textViews)
+    // Check if the game is won. Sets the indices of the winning cells
+    // (0 to 8, to align with the boardCells array of textViews)
     private fun gameWon(): Boolean {
         // Check rows: If any row has all the same tokens, then the currentPlayer is the winner
         for (row in 0..2) {
@@ -283,10 +284,8 @@ class PlayGameActivity : AppCompatActivity() {
         }
     }
 
-    // Check if the game is drawn: If board is full but the game was not won, then it is a draw
-    private fun gameDraw(): Boolean {
-        return gameBoard.flatten().all { it.isNotEmpty() }
-    }
+    // Check if the game is a tie: If board is full but there is no winner, then it is a draw
+    private fun gameDraw(): Boolean { return gameBoard.flatten().all { it.isNotEmpty() } }
 
     // End the game and update the player stats in the local game data file
     private fun endGame(message: String) {
@@ -305,7 +304,6 @@ class PlayGameActivity : AppCompatActivity() {
             }
         }
 
-        // NOTE: the toast is temporary for testing purposes
         appUtils.showToast(this, message)
 
         gameEnded = true
@@ -329,21 +327,15 @@ class PlayGameActivity : AppCompatActivity() {
         winningCells = emptyList()
 
         // Reset cell colors to the initial color
-        boardCells.forEach { cell ->
-            cell.setTextColor(defaultTextColorStateList)
-        }
+        boardCells.forEach { cell -> cell.setTextColor(defaultTextColorStateList) }
     }
 
     // Update the game status text
-    private fun updateGameStatusText(message: String) {
-        binding.textViewPlayerTurn.text = message
-    }
+    private fun updateGameStatusText(message: String) { binding.textViewPlayerTurn.text = message }
 
     // Show the restart dialog
     private fun showRestartDialog() {
-        val restartDialog = RestartDialogFragment {
-            restartGame()
-        }
+        val restartDialog = RestartDialogFragment { restartGame() }
         restartDialog.show(supportFragmentManager, RestartDialogFragment.TAG)
     }
 
@@ -359,10 +351,17 @@ class PlayGameActivity : AppCompatActivity() {
         androidTurnTask?.cancel(true)
     }
 
+    // ----------------------------
+    // DATA PERSISTENCE
+    // ----------------------------
+    // Save game state to restore on device rotation
     override fun onSaveInstanceState(outState: Bundle) {
         super.onSaveInstanceState(outState)
+
+        val diffLevel = if (gameMode == "singlePlayer") { difficulty } else { "Easy" }
+
         outState.putString("gameMode", gameMode)
-        outState.putString("difficulty", difficulty)
+        outState.putString("difficulty", diffLevel)
         outState.putString("playerOne", playerOne)
         outState.putString("playerTwo", playerTwo)
         outState.putString("currentPlayer", currentPlayer)

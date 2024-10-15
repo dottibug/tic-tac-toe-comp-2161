@@ -7,6 +7,8 @@ import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import com.example.tictactoe.databinding.ActivityManagePlayersBinding
 
+// Activity for managing players in the local game data file. Users can reset player stats,
+// delete a specific player, or delete all players.
 class ManagePlayersActivity : AppCompatActivity() {
     private lateinit var binding: ActivityManagePlayersBinding
     private val playerManager = PlayerManager()
@@ -28,7 +30,6 @@ class ManagePlayersActivity : AppCompatActivity() {
         binding.buttonResetStats.setOnClickListener { resetStats() }
         binding.buttonDeletePlayer.setOnClickListener { showDeletePlayerFragment() }
         binding.buttonDeleteAllPlayers.setOnClickListener { showDeleteAllPlayersFragment() }
-
         binding.buttonManagePlayersBackToStats.setOnClickListener { finish() }
     }
 

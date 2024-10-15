@@ -10,6 +10,7 @@ import androidx.core.view.WindowInsetsCompat
 import androidx.preference.PreferenceManager
 import com.example.tictactoe.databinding.ActivityMainBinding
 
+// MainActivity class for the Tic Tac Toe game.
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
     private val playerManager = PlayerManager()
@@ -39,10 +40,10 @@ class MainActivity : AppCompatActivity() {
 
     // Set up the local game data file
     private fun setupPlayerDataFile() {
-        // NOTE: Dev purposes only (to delete local file when testing)
-//         playerManager.deletePlayerDataFile(this)
+       playerManager.createPlayerDataFile(this)
 
-        playerManager.createPlayerDataFile(this)
+        // NOTE: For development purposes only
+        // playerManager.deletePlayerDataFile(this)
     }
 
     // Start the EnterNamesActivity to add player names to the local game data file
@@ -69,6 +70,7 @@ class MainActivity : AppCompatActivity() {
         startActivity(intent)
     }
 
+    // Set up the UI based on dark mode preference
     private fun setupDarkModePreference() {
         val sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this)
         val isDarkMode = sharedPreferences.getBoolean("darkMode", false)

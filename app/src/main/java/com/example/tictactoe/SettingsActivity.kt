@@ -3,6 +3,7 @@ package com.example.tictactoe
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 
+// Settings activity. Shows the settings fragment for the root preferences.
 class SettingsActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {

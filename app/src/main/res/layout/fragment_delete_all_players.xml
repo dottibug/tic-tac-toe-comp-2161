@@ -30,6 +30,7 @@
         <Button
             android:id="@+id/buttonConfirmDeletePlayers"
             style="@style/buttonPrimary"
+            android:layout_width="250dp"
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="32dp"
             android:backgroundTint="?attr/colorError"

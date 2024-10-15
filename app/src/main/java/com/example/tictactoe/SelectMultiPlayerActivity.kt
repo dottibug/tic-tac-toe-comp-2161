@@ -12,6 +12,7 @@ import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import com.example.tictactoe.databinding.ActivitySelectMultiPlayerBinding
 
+// Activity for selecting two players for multiplayer game play.
 class SelectMultiPlayerActivity : AppCompatActivity() {
     private lateinit var binding: ActivitySelectMultiPlayerBinding
     private val playerManager = PlayerManager()
@@ -85,6 +86,7 @@ class SelectMultiPlayerActivity : AppCompatActivity() {
                 val selectedPlayer = parent?.getItemAtPosition(position) as String
                 saveSelectedPlayer(selectedPlayer, playerNumber)
 
+                // Update the saved positions for the selected players
                 if (playerNumber == "PlayerOne") {
                     savedPlayerOneSpinnerPosition = position
                 } else {
@@ -106,6 +108,7 @@ class SelectMultiPlayerActivity : AppCompatActivity() {
         editor.apply()
     }
 
+    // Handle the click event for the "Play Game" button
     private fun handlePlayGameVsPlayers() {
         // Get the selected player names from shared preferences
         val sharedPreferences = getSharedPreferences("GamePrefs", MODE_PRIVATE)
@@ -129,11 +132,13 @@ class SelectMultiPlayerActivity : AppCompatActivity() {
         }
     }
 
+    // Handle the click event for the "Add New Player" button
     private fun handleAddNewPlayer() {
         val intent = Intent(this, GameSetupAddNewPlayerActivity::class.java)
         startActivity(intent)
     }
 
+    // On resume, update the player list if a new player was added
     override fun onResume() {
         super.onResume()
         val sharedPreferences = getSharedPreferences("GamePrefs", MODE_PRIVATE)
@@ -145,6 +150,7 @@ class SelectMultiPlayerActivity : AppCompatActivity() {
         }
     }
 
+    // Update the player list by asynchronously getting the list of players from the local game data file
     private fun updatePlayerList() {
         playerManager.asyncGetPlayers(this) { players ->
             populateMenus(players)

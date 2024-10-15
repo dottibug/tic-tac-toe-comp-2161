@@ -14,6 +14,8 @@ data class Player(val name: String, val totalGames: Int, val losses: Int, val ti
 
 // PlayerManager class for managing player data in the local game data file and creating Player objects
 // Reading and writing to the local game data file is done asynchronously using AsyncTask
+// A synchronization lock is used to ensure only one thread can access the local file at a time (to
+// avoid outdated data being read or written to the file)
 class PlayerManager() {
     private val PLAYERDATA = "playerData.txt"
     private val fileLock = Any()
@@ -34,7 +36,7 @@ class PlayerManager() {
     }
 
     // Access the local game data file
-    fun getPlayerData(context: Context): File {
+    private fun getPlayerData(context: Context): File {
         return File(context.filesDir, PLAYERDATA)
     }
 
@@ -61,7 +63,6 @@ class PlayerManager() {
         ResetStatsTask(fileLock, file, callback).execute()
     }
 
-    // Note: This function IS used. DO NOT delete it. Delete this comment when app is done.
     // Delete player data from the local game data file
     fun asyncDeletePlayer(context: Context, playerName: String, callback: (Boolean) -> Unit) {
         val file = getPlayerData(context)
@@ -73,7 +74,7 @@ class PlayerManager() {
         DeleteAllPlayersTask(fileLock, file, callback).execute()
     }
 
-    // TODO: For testing only; delete
+    // NOTE: For development purposes only
     fun deletePlayerDataFile(context: Context) {
         val file = getPlayerData(context)
         file.delete()
@@ -85,7 +86,6 @@ class PlayerManager() {
 
     // Add a player to the local game data file if the player does not already exist
     // Returns a response object with a success boolean and message string
-    // Uses synchronization to ensure only one thread can access the local file at a time
     private class AddPlayerTask(
         private val fileLock: Any,
         private val file: File,
@@ -178,13 +178,14 @@ class PlayerManager() {
             }
         }
 
+        // Calculate and format the win percentage stat
         private fun getWinPercentage(wins: Int, totalGames: Int): String {
             val percentFormat = DecimalFormat("#.##'%'")
             val winPercentage = (wins.toDouble() / totalGames.toDouble()) * 100
             return percentFormat.format(winPercentage)
         }
 
-        // Date format: Jan 1 2024 12:30 AM
+        // Get and format the current date. Date format: Jan 1 2024 12:30 AM
         private fun getDate(): String {
             val milliseconds = System.currentTimeMillis()
             val dateFormat = SimpleDateFormat("MMM d 'at' h:mm a", Locale.CANADA)

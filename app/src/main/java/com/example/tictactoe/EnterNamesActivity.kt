@@ -44,7 +44,6 @@ class EnterNamesActivity : AppCompatActivity() {
                 if (response.success) {
                     appUtils.showToast(this, response.message)
                     binding.editTextPlayerName.text.clear()
-                    finish()
                 }
 
                 // Player already exists: toast message
@@ -65,6 +64,8 @@ class EnterNamesActivity : AppCompatActivity() {
     // Restore state of editTextPlayerName
     override fun onRestoreInstanceState(savedInstanceState: Bundle) {
         super.onRestoreInstanceState(savedInstanceState)
-        binding.editTextPlayerName.setText(savedInstanceState.getString("playerName", ""))
+        val playerName = savedInstanceState.getString("playerName", "")
+        binding.editTextPlayerName.setText(playerName)
+        binding.editTextPlayerName.setSelection(playerName.length)
     }
 }

@@ -25,7 +25,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
-                android:layout_marginTop="-12dp"
+                android:layout_marginTop="-18dp"
                 android:background="@android:color/transparent"
                 android:text="@string/tic"
                 android:textColor="?attr/colorSecondary" />
@@ -57,36 +57,38 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
-            android:layout_weight="1.25"
+            android:layout_weight="1"
             android:orientation="vertical">
-
-            <Button
-                android:id="@+id/buttonPlayerNames"
-                style="@style/buttonPrimary"
-                android:layout_width="300dp"
-                android:layout_height="64dp"
-                android:layout_gravity="center_horizontal"
-                android:backgroundTint="?attr/colorPrimary"
-                android:text="@string/addPlayer"
-                android:textColor="?attr/android:background"
-                android:textSize="22sp" />
 
             <Button
                 android:id="@+id/buttonNewGame"
                 style="@style/buttonPrimary"
+                android:layout_width="250dp"
                 android:layout_height="64dp"
-                android:layout_gravity="center_horizontal"
-                android:layout_marginTop="12dp"
+                android:layout_gravity="left"
                 android:backgroundTint="?attr/colorPrimary"
                 android:text="@string/playGame"
                 android:textColor="?attr/android:background"
                 android:textSize="22sp" />
 
             <Button
+                android:id="@+id/buttonPlayerNames"
+                style="@style/buttonPrimary"
+                android:layout_width="250dp"
+                android:layout_height="64dp"
+                android:layout_gravity="left"
+                android:layout_marginTop="12dp"
+                android:backgroundTint="?attr/colorPrimary"
+                android:text="@string/addPlayer"
+                android:textColor="?attr/android:background"
+                android:textSize="22sp" />
+
+            <Button
                 android:id="@+id/buttonStandings"
                 style="@style/buttonPrimary"
+                android:layout_width="250dp"
                 android:layout_height="64dp"
-                android:layout_gravity="center_horizontal"
+                android:layout_gravity="left"
                 android:layout_marginTop="12dp"
                 android:layout_marginBottom="12dp"
                 android:backgroundTint="?attr/colorPrimary"
@@ -97,8 +99,9 @@
             <Button
                 android:id="@+id/buttonSettings"
                 style="@style/buttonPrimary"
+                android:layout_width="250dp"
                 android:layout_height="64dp"
-                android:layout_gravity="center_horizontal"
+                android:layout_gravity="left"
                 android:backgroundTint="?attr/colorPrimary"
                 android:text="@string/settings"
                 android:textColor="?attr/android:background"

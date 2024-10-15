@@ -1,7 +1,6 @@
 package com.example.tictactoe
 
 import android.os.AsyncTask
-import android.util.Log
 
 // Asynchronous Android turn logic based on the settings difficulty level:
 //      - Easy: Android picks a random empty cell to place an O
@@ -16,11 +15,10 @@ class AsyncAndroidTurn(
 ) : AsyncTask<Void, Void, Pair<Int, Int>>() {
 
         override fun doInBackground(vararg params: Void?): Pair<Int, Int>? {
-            Log.i("testcat", "difficulty: $difficulty")
-
             // Delay for 1 second to simulate "thinking" time
             Thread.sleep(1000)
 
+            // Return the coordinates of Android's move based on the game difficulty setting
             return when (difficulty) {
                 "Easy" -> chooseRandomEmptyCell()
                 "Medium" -> placeToWin() ?: goBesideTwo("X") ?: chooseRandomEmptyCell()
@@ -37,16 +35,18 @@ class AsyncAndroidTurn(
     private fun chooseRandomEmptyCell(): Pair<Int, Int>? {
         val emptyCells = mutableListOf<Pair<Int, Int>>()
 
+        // Flatten the game board and check for empty cells
         gameBoard.flatten().forEachIndexed { index, token ->
             val row = index / 3
             val col = index % 3
             if (token.isEmpty()) { emptyCells.add(Pair(row, col)) }
         }
 
+        // Return a random empty cell
         return emptyCells.randomOrNull()
     }
 
-    // game board array
+    // Game board 2D array
     // | [ 00, 01, 02 ], |
     // | [ 10, 11, 12 ], |
     // | [ 20, 21, 22 ]  |
